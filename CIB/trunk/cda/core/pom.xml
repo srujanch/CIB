@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>SBSA GreenField CDA Core</name>
+    <description>The core CDA common jar file. It is packaged with all CDA wars (eg. templating war, portal cars, portlet war), and contains all _common_ code/resources that are required by these wars.</description>
+    <artifactId>sbsa-sbg-cda-core</artifactId>
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>za.co.standardbank</groupId>
+        <artifactId>sbsa-sbg-cda</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+		<dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vgn-appsvcs-cda</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+			
+       <!--  <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-contentbeans</artifactId>
+        </dependency> -->
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+		
+		<!--
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>thirdparty-combined</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vgn-community-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vgn-shared-security-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+        </dependency> 
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vgnhpdapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vgnssl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		 <dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
+    </dependencies>
+</project>

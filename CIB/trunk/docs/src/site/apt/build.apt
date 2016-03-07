@@ -1,0 +1,103 @@
+Build
+
+  This section outlines the process for building and tagging (and when required 
+  branching) a release of the SBSA application. Apache Maven 
+  ({{http://maven.apache.org}}) is the tool of choice for build and release.
+  
+  The build/release process removes much of the manual work involved with 
+  packaging, tagging, and deploying, etc. In order to execute the steps below, 
+  the following tools must be installed on the build machine:
+  
+  * Maven (version 2.1.x or greater)
+  
+  * SVN command line client.
+  
+  Additionally, before running the build/release process for the first time, 
+  ensure that the maven settings.xml file exists in your home directory with 
+  values relevant for your environment:
+    
+------
+c:\Documents and Settings\<username>\.m2
+------
+
+  An example settings.sample.xml file can be found in the code structure in the
+  root directory of the codebase:
+
+* Prerequisites
+
+  [[1]] Export master site car files from portal console
+  and check into SVN in the following directory:
+
+------
+/cda/dist/src/site
+------
+
+  [[2]] Ensure that any changes in the VgnExtTemplating resource have been 
+  incorporated. If desired, any changes can be added to the following files, 
+  which are packaged along with the final assembly as examples.
+  
+------
+/cda/dist/src/config/VgnExtTemplating-mgmt.txt
+/cda/dist/src/config/VgnExtTemplating-delivery.txt
+------ 
+
+* Steps
+
+  [[1]] Create a new tag in svn if appropriate and ensure the local build source 
+  directory structure is clean and up to date.
+
+  [[2]] To commence build, run the command below from the appropriate root 
+  directory (typically the trunk, but may also be a specific branch if building
+  a maintenance release). 
+  
+------
+mvn clean install
+------
+
+  Note: as an alternative to the "clean install" approach, it is possible to use
+  mvn release command, however this has not been used on the project to date.
+
+------
+mvn release:clean release:prepare
+mvn release:perform
+------  
+
+  The release:perform command expects a release.properties file to be 
+  present in the root directory (the release.properties file is created 
+  by the release:prepare command). If this file is no longer present (it is 
+  normally deleted by the release:perform command), then a release can be
+  created directly from a tag via the following command:
+  
+
+  [[3]] If necessary, create a branch. This is a decision to be taken by the 
+  development team, but typically, a branch should be created to allow 
+  maintenance releases to be made whilst primary new-feature development 
+  continues in the trunk. For example, if version 1.2 is released to 
+  production, then a branch called "sbsa-1.2.x" should be created to allow 
+  support of that release whilst feature-release 1.3 continues in the trunk. The
+  maven pom.xml version number of the branch must be incrememted to a 
+  point/build release - in this case, 1.2.1. The update of version numbers is 
+  handled by maven automagically.
+  
+  To create a branch, execute the following command, entering the new version 
+  numbers for all modules when prompted. Note: The version number for all 
+  modules should be identical. Using the command below, the version numbers in 
+  the new branch are updated, not in the trunk.
+  
+------
+mvn release:branch -DbranchName=<branch name - eg. sbsa-1.2.x> -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false
+------
+  
+  [[4]] If necessary, in addition to the CDA project, create a tag with the same
+  version number of the HTML project. This allows us to map CDA HTML back to 
+  provided HTML if necessary.
+  
+  [[5]] If desired, create and optionally deploy the maven site for the new 
+  version. This is achieved by running one of the following 2 commands from the 
+  CDA/trunk directory
+  
+------
+mvn site
+mvn site-deploy
+------
+

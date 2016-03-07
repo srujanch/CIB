@@ -1,0 +1,169 @@
+<script type="text/javascript">
+	var runtimeVersion = "2.0.0",
+	directLink = "http://download.efxnow.com/StandardBank/StandardfxTrader.application";
+	function HasRuntimeVersion(v){
+		var va = GetVersion(v),
+			i,
+			a = navigator.userAgent.match(/\.NET CLR [0-9.]+/g);
+		if (a != null){
+			for (i = 0; i < a.length; ++i){
+				if (CompareVersions(va, GetVersion(a[i])) <= 0){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	function GetVersion(v){
+		var a = v.match(/([0-9]+)\.([0-9]+)\.([0-9]+)/i);
+		return a.slice(1);
+	}
+	function CompareVersions(v1, v2){
+		for (i = 0; i < v1.length; ++i){
+			var n1 = new Number(v1[i]),
+			n2 = new Number(v2[i]);
+			if (n1 < n2){
+				return -1;
+			}
+			if (n1 > n2){
+				return 1;
+			}
+		}
+		return 0;
+	}
+	function loginToWinVer(){
+		if (HasRuntimeVersion(runtimeVersion)) {
+			window.location = "http://download.efxnow.com/StandardBank/StandardfxTrader.application"
+		}else {
+			window.location = "http://download.efxnow.com/StandardBank/"
+		}
+	}
+( function($){// bodyguard function
+	$(document).ready(function(){
+		document.getElementById("chkIAgree").checked = false;
+		if (HasRuntimeVersion(runtimeVersion)){
+			$("#installButton").attr('onclick', 'window.location='+directLink);
+		//	document.getElementById("BootstrapperSection").style.display = "none";
+		}
+		$('#chkIAgree').click(function(e){
+			if($(this).prop('checked') === true){
+				$('#installButton').show();
+			}else{
+				$('#installButton').hide();
+			}
+		});
+		$('#installButton').click(function(e){
+			window.location = 'http://download.efxnow.com/StandardBank/setup.exe';
+			$('.window').remove();
+			$('#mask').fadeOut();
+		});
+	});// bodyguard function
+}) (jQuery);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-4811946-52']);
+	_gaq.push(['_trackPageview']);
+
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
+<div id="softwareInstall" class="formPopup">
+		<h1>Software Installation Instructions</h1>
+		<p>Simply follow the instructions below to access the platform.</p>
+		<p>Step 1: Review and accept Software License Agreement</p>
+		<p>Step 2: Click "Install" button</p>
+		<p>Step 3: Click "Run"</p>
+		<p>The application will automatically launch once it's installed. Simply enter your demo account User ID and Password to login.</p>
+		<h1>Software License Agreement</h1>
+		<textarea name="textarea" readonly="readonly" class="txtEULA" id="txtEULA" >
+END-USER LICENSE AGREEMENT
+FOR Standard FX Trader for Windows&copy; SOFTWARE
+
+1. SCOPE OF THIS AGREEMENT. This End-User License Agreement is made between your foreign currency exchange account provider ("Company") and you ("User") governing your installation and use of the Standard FX Trader ("Software") by completing the registration process to open and hold a foreign currency trading account with Company. This Agreement protects both the installation and usage of the Software and any and all associated software components, media, user guides, and training or education materials, whether in electronic or paper form (collectively the "Software Product") entered into when you complete the registration process to open said account with Company.
+
+2. RELATIONSHIP TO COMPANY AND COMPANY SERVICES.
+If you have a foreign currency trading account with Company, you are a Company customer and Standard FX Trader is an "electronic service" within the meaning of Company's Customer Agreement. Your use of Standard FX Trader is subject to the License Agreement between Company and Third Party Licensor and the provisions of the Customer Agreement you executed with the Company in order to open a trading account with Company. You acknowledge and attest Standard FX Trader, as an electronic advice, is not intended to provide investment, tax or legal advice. Standard FX Trader is licensed for use and distribution to Company from a third party licensor and is protected by intellectual property laws and international intellectual property treaties. User's access to Standard FX Trader is licensed and not sold. In the event a conflict arises between the rights and obligations conferred by this License Agreement and the Customer Agreement, the Customer Agreement will prevail.
+
+If you do not have a foreign currency trading account with Company, you are not a Company customer, and you acknowledge and agree that Company owes you no duties and has made no representations of any kind whatsoever to you other than as may be set forth expressly in this Agreement. You also acknowledge and agree to the following terms and conditions:
+
+* By making Standard FX Trader available to you, Company is not providing you with any investment, tax or other form of advice. 
+
+* Should you open a foreign currency trading account with Company in the future, your use of Standard FX Trader will be governed by the Customer Agreement and this License Agreement. 
+
+* Your use of Standard FX Trader will be in a manner not inconsistent with applicable laws and regulations. 
+
+* Standard FX Trader incorporates market data and other information (collectively "Market Data") which the Third Party Licensor receives from its agents, vendors or partners ("Third Party Providers"). Third Party Licensor nor the Company does not endorse or approve the Market Information and makes it available to Company and you only as a service and convenience. Company, Third Party Licensor and the Third Party Providers do not (1) guarantee the accuracy, timeliness, completeness or correct sequencing of the Market Information, or (2) warrant any results from your use or reliance on the Market Information. Market Information may quickly become unreliable for various reasons including, for example, changes in market conditions or economic circumstances. Neither Company, Third Party Licensor nor the Third Party Providers are obligated to update any information or opinions contained in any Market Information, and we may discontinue offering Market Information at any time without notice. You agree that neither Company, Third Party Licensor nor the Third Party Providers will be liable in any way for the termination, interruption, delay or inaccuracy of any Market Information. You will not redistribute or facilitate the redistribution of Market Information, nor will you provide access to Market Information to anyone who is not authorized by Company to receive Market Information. 
+
+* User agrees that from time to time, Standard FX Trader may be inaccessible or inoperable for any reason, including, without limitation: (a) equipment (hardware) malfunctions, (b) software malfunctions, (c) periodic maintenance procedures or repairs which Third Party Licensor or Company may undertake from time to time, or (d) causes beyond the reasonable control of Third Party Licensor or Company or which causes are not reasonably foreseeable by Third Party Licensor or Company. 
+
+* Company is not responsible, directly or indirectly, for the performance and/or reliability of the Third Party Licensor or Third Party Providers or User's Internet Service Provider ("ISP"). 
+
+* User shall be solely responsible for providing, maintaining and ensuring compatibility with the Software, all hardware, electrical and other physical requirements for User's use of the Software including, without limitation, telecommunications and Internet connection(s), ISP, web browsers and/or other equipment, programs and services required to access and use the Software. 
+
+3. ELECTRONIC SIGNATURE AND DELIVERY. Standard FX Trader includes important disclosures and information that are associated with Standard FX Trader's electronic content and services. When you click "I agree" below you will be signing and consenting to signing Standard FX Trader License Agreement electronically and to electronic delivery of the disclosures and information contained in Standard FX Trader.
+
+4. OTHER EFFECTS OF YOUR SIGNATURE BELOW. By clicking "I agree" below, you will also confirm your understanding, acceptance and receipt of Standard FX Trader License Agreement and its terms and conditions and you will acknowledge and demonstrate that you can access Standard FX Trader and the other electronic disclosures and information associated with the Software Product. This is required in order to install Standard FX Trader. We will be creating an electronic record that you have downloaded Standard FX Trader, are using it, and that you have agreed to the terms of the Standard FX Trader License Agreement. If you do not agree to the terms of this Agreement, do not install or use Standard FX Trader and select "Cancel" below.
+
+5. GRANT OF LICENSE. Company grants you a non-exclusive, non-transferable sublicense to install and use a copy of Standard FX Trader in multiple computers running a validly licensed copy of Windows&copy; for which Third Party Licensor developed and designed Standard FX Trader.
+ 
+You acknowledge that Company has granted this sublicense to you for mutual consideration. This sublicense is restricted to your personal use or if user is a corporate entity for the use of its employees in the course of each individual's employment for the limited purposes described in the user's guide and any training materials. This sublicense permits you to make one copy of Standard FX Trader for backup or archival purposes only. Any copying and/or redistribution or alternatively facilitating in redistribution of Standard FX Trader is strictly prohibited without the prior express written consent by Company. Should you require further information as per the Third Party Licensor, you may request this information in writing directly to the Company. Company will use its discretion as to the information it wishes to release to individual customers. You are acquiring no right to use, and shall not use, without Company's prior written consent, the terms or existence of this Agreement, the names, characters, artwork, designs, trade names, copyrighted materials, trademarks or service markets of the Company, its affiliates, agents, vendors and licensors. Standard FX Trader is provided in object code form only.
+
+6. RESTRICTIONS ON USE. You shall not (a) use, copy, merge, make derivative works of or transfer copies of the Software Product, except as specifically authorized in this Agreement; (b) use the backup or archival copy of the Software Product (or permit any third party to use such copy) for any purpose other than to replace the original copy in the event that it is destroyed or becomes defective; (c) rent, lease, sublicense, distribute, transfer, copy, modify or timeshare the Software Product or any of your rights under this Agreement, except as expressly authorized in this Agreement; (d) provide unauthorized third parties with access to or use of the Software Product; (e) reverse engineer, disassemble, decompile or otherwise attempt to access the source code of the Software Product, except and only to the extent that such activity is expressly permitted by applicable law; or (f) use the Software Product after any expiration, termination or cancellation of this Agreement or the license granted in Grant of License Section set herein.
+ 
+7. OWNERSHIP. The Software Product is sublicensed, not sold, to you for use only upon the terms of this Agreement, and Company and its vendors, licensors or suppliers reserve all rights not expressly granted to you. Company retains the original license granted as per the Software Product. The Software Product is protected by U.S. copyright laws and international treaties, and the unauthorized reproduction or distribution thereof is subject to civil and criminal penalties. All title and intellectual property rights in and to the content which may be accessed through use of the Software Product is the property of the respective content owner(s) and may be subject to their terms and conditions.
+
+8. SUPPORT SERVICES. Company or its agents may provide you with support services related to the Software Product ("Support Services"). Any supplemental software code or other materials provided to you as part of the Support Services shall be considered part of the Software Product and subject to the terms and conditions of this Agreement. With respect to technical information you provide to Company as part of the Support Services, you agree and acknowledge that Company may use such information for its business purposes, including for product support and development for which you will make no claim. Company will not utilize such technical information in a form that personally identifies you.
+
+9. TERM AND TERMINATION. The term of this Agreement and the sublicense granted to you will continue until it is terminated as provided in this Section. Without prejudice to any other rights Company may have, the sublicense granted under this Agreement will terminate automatically in the event you violate any provision of this Agreement or if you or Company terminates your relationship with Company by closing your trading account. You may terminate or cancel the sublicense granted by discontinuing use of the Software Product and providing Company with written notice. In the event of termination, for any reason, you shall delete the Software Product from your computer(s) and either destroy any tangible media containing the Software Product or return it to Company. You understand that Company may discontinue technical and customer support for this Software Product at any time without any recourse by you.
+
+10. DISCLAIMER OF WARRANTIES. THE SOFTWARE PRODUCT IS PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY KIND. ALL WARRANTIES ARE DISCLAIMED, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR THAT THE SOFTWARE PRODUCT'S FUNCTIONS WILL MEET YOUR REQUIREMENTS OR THAT ITS OPERATION WILL BE UNINTERRUPTED OR ERROR FREE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE PRODUCT IS WITH YOU. THIS DISCLAIMER APPLIES TO AND IS FOR THE BENEFIT OF COMPANY, ITS AFFILIATES, AGENTS, VENDORS AND LICENSORS.
+
+11. LIMITATION OF LIABILITY. To the maximum extent permitted by applicable law, in no event shall Company, its affiliates, agents, vendors or licensors be liable to you or any third party for any damages of any kind, including but not limited to punitive, exemplary, special, incidental, indirect or consequential damages (for example, loss of personal or business profits, business interruption, loss of business information or any other pecuniary loss) arising out of the use of or inability to use the Software Product or the provision of or failure to provide Support Services. This limitation applies even if Company has been advised of the possibility of such damages and regardless of the form of action, whether in contract, tort (including negligence), strict liability or otherwise.
+
+12. GENERAL. You acknowledge and agree that each provision of this Agreement that provides for a disclaimer of warranties or an exclusion or limitation of damages represents an express allocation of risk, and is part of the consideration of this Agreement. 
+
+a.  Amendment.  Company shall have the right, at any time and without prior written notice to or consent from User, to add to or modify the terms of this Agreement, simply by delivering such amended terms to User by e-mail at the address provided to Company by User or by requiring the User to accept an updated Agreement upon accessing the Software/Service. User's access to or use of the Software/Service after the date such amended terms are delivered to User shall be deemed to constitute acceptance of such amended terms.
+
+b.  Waiver.  No waiver of any term, provision or condition of this Agreement, whether by conduct or otherwise, in any one or more instances, shall be deemed to be, or shall constitute, a waiver of any other term, provision or condition hereof, whether or not similar, nor shall such waiver constitute a continuing waiver of any such term, provision or condition hereof. No waiver shall be binding unless executed in writing by the party making the waiver.
+
+c.  Severability.  If any provision of this Agreement is determined to be illegal or unenforceable, then such provision shall be enforced to the maximum extent possible and the other provisions shall remain fully effective and enforceable.
+
+d.  Notice.  All notices shall be in writing and shall be deemed to be delivered when sent by first-class mail or when sent by facsimile or e-mail to either parties' last known post office, facsimile or e-mail address, respectively. User hereby consents to notice by e-mail. All notices shall be directed to the parties at the respective addresses given above or to such other address as either party may, from time to time, provide to the other party.
+
+e.  Governing Law.  This Agreement is made in and shall be governed by the laws of the State of New York without reference to any conflicts of laws. You agree that all actions or proceedings arising in connection with this Agreement shall be tried and litigated in the state and federal courts located in New York, New York, or such other jurisdiction that Company or Third Party Licensor deems appropriate. Company's affiliates, agents, vendors and licensors are intended third party beneficiaries of this Agreement.
+
+f.  Dispute Resolution.  Any and all disputes relating to or arising out of this Agreement including, but not limited to, the arbitrability and the validity of this Agreement shall be resolved by binding arbitration in New York, New York or such other jurisdiction that Company or Third Party Licensor deems appropriate.
+  
+g.  Force Majeure.  If the performance of any part of this Agreement by either party is prevented, hindered, delayed or otherwise made impracticable by causes beyond the reasonable control of either party, that party shall be excused from such performance to the extent that it is prevented, hindered or delayed by such causes.
+
+h.  Entire Agreement.  This Agreement constitutes the complete and exclusive statement of the agreement between the parties with respect to the Software/Service and supersedes any and all prior or contemporaneous communications, representations, statements and understandings, whether oral or written, between the parties concerning the Software/Service.
+
+BY CLICKING THE ACCEPTANCE BUTTON OR ACCESSING, USING OR INSTALLING ANY PART OF THE SOFTWARE/SERVICE, USER EXPRESSLY AGREES TO AND CONSENTS TO BE BOUND BY ALL THE TERMS OF THIS AGREEMENT. IF USER DOES NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, THE BUTTON INDICATING NON-ACCEPTANCE MUST BE SELECTED AND COMPANY SHALL PROMPTLY CANCEL THIS TRANSACTION AND USER MAY NOT ACCESS, USE OR INSTALL ANY PART OF THE SOFTWARE/SERVICE. THIS AGREEMENT IS APPLICABLE FOR ALL RELEASED VERSIONS OF THE SOFTWARE/SERVICE. THIS AGREEMENT MAY BE AMENDED FROM TIME TO TIME AT THE SOLE DISCRETION OF COMPANY. USER SHALL BE PROVIDED WITH THIRTY (30) DAYS ADVANCE NOTICE BY E-MAIL OF ANY SUCH AMENDMENTS AND SHALL HAVE THE OPPORTUNITY TO REFUSE SAID AMENDMENTS SOLELY BY REQUESTING TERMINATION OF ACCESS TO THE SOFTWARE/SERVICE.
+
+Signature:
+
+I have read, understood and consented to electronic delivery of, the disclosures above, and I agree to enter into a legally binding contract based on the above terms and conditions.
+
+I intend the act of selecting "I agree" to be my legal signature to this Agreement.</textarea>
+			<div class="conditions">
+				<p class="padT20 textCenter"><input name="checkbox" type="checkbox" id="chkIAgree" /> <label for="chkIAgree">I Agree</label></p>
+				<p class="textCenter"><input type="button" value="Install now &raquo;" class="hidden" id="installButton" /></p>
+			</div>
+			<h1>System Requirements</h1>
+			<ul>
+				<li>Processing speed of 1Ghz or higher</li>
+				<li>Monitor resolution set at 1024x768 or higher</li>
+				<li>Windows 2000 / XP / Vista</li>
+				<li>512MB of RAM or higher</li>
+				<li>100MB of free hard drive space</li>
+				<li>.NET Framework 2.0 or higher</li>
+				<li>Broadband Internet Connection</li>
+			</ul>
+			<div class="disclaimerText">
+				<p>Forex trading involves significant risk of loss, including the risk of loss of any capital amount(s) invested due to market fluctuation, and is not suitable for all investors. Increasing leverage increases risk. Before deciding to trade forex, you should carefully consider your financial objectives, level of experience and risk appetite. Any opinions, news, research, analysis, prices or other information contained on this website do not constitute investment advice.</p>
+			</div>
+</div>

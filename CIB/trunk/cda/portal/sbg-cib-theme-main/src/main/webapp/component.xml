@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epideploy:component build-version="gold" component-id="a9040ad7554a80a583e37345c7f819a0" component-type="Themes" description="SBG CIB Theme" epi-build="688968" epi-version="8.1" major-version="1" minor-version="0" title="SBG CIB Theme" xmlns:epideploy="http://www.epicentric.com/deployment">
+ <epideploy:required-component component-id="XQcZbddcQTYXaQaVYTeTXTUVcXfYRZaQ" component-type="Styles" major-version="-1" minor-version="-1"/>
+ <epideploy:required-component component-id="aVfVRVRfRXRTZQaVYTeTXTUVcXfYRZaQ" component-type="Styles" major-version="-1" minor-version="-1"/>
+ <epideploy:required-component component-id="bTVWSdbfTWWdbQaVYTeTXTUVcXfYRZaQ" component-type="Styles" major-version="-1" minor-version="-1"/>
+ <epideploy:detail>
+  <theme>
+   <uid>a9040ad7554a80a583e37345c7f819a0</uid>
+   <title>SBG CIB Theme</title>
+   <description>SBG CIB Theme</description>
+   <friendly-id>SBGCIBTheme</friendly-id>
+   <is-system>false</is-system>
+   <visible>true</visible>
+   <style>
+    <template-uid>template0002</template-uid>
+    <style-uid>aVfVRVRfRXRTZQaVYTeTXTUVcXfYRZaQ</style-uid>
+   </style>
+   <style>
+    <template-uid>template0035</template-uid>
+    <style-uid>XQcZbddcQTYXaQaVYTeTXTUVcXfYRZaQ</style-uid>
+   </style>
+   <style>
+    <template-uid>template0008</template-uid>
+    <style-uid>bTVWSdbfTWWdbQaVYTeTXTUVcXfYRZaQ</style-uid>
+   </style>
+  </theme>
+ </epideploy:detail>
+</epideploy:component>

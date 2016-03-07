@@ -1,0 +1,88 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	 <name>SBSA GreenFieldl CDA Portlet Contact Me</name>
+     <description>Project for contact me portlet.</description>
+	<!-- <groupId>za.co.standardbank.cda.ContactMeportlet</groupId> -->
+	<artifactId>sbg-fxt-portlet-contact-me</artifactId>
+	<packaging>war</packaging>
+	<parent>
+        <groupId>za.co.standardbank</groupId>
+        <artifactId>sbsa-sbg-cda-portlet</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+	<properties>
+		<junit.version>3.8.1</junit.version>
+		<springframework.version>2.0.6</springframework.version>
+		<portlet-api.version>1.0</portlet-api.version>
+		<servlet-api.version>2.3</servlet-api.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cda-portlet-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>portlet-api</groupId>
+			<artifactId>portlet-api</artifactId>
+			<version>${portlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-portlet</artifactId>
+			<version>${springframework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${springframework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.1</version>
+			<scope>compile</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>springframework</id>
+			<name>Maven Spring repository</name>
+			<url>http://repo1.maven.org/maven-spring/</url>
+		</repository>
+	</repositories>
+	<build>
+		<finalName>${artifactId}</finalName>
+    </build>	
+</project>

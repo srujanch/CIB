@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<!-- Controllers -->
+	<bean id="configController" class="za.co.standardbank.sbg.cda.mvc.portlet.controller.ContactMeConfigController">
+		<property name="commandName" value="contactmeConfig"/>
+		<property name="commandClass" value="za.co.standardbank.sbg.cda.mvc.portlet.domain.ContactMeConfigInfo" />
+		<property name="formView" value="contactmeConfig"></property>
+		<property name="successView" value="contactmeConfig"></property>
+	</bean>
+
+	<bean id="insertController" class="za.co.standardbank.sbg.cda.mvc.portlet.controller.ContactMeInsertController">
+		<property name="commandName" value="contactmeInfo"/>
+		<property name="commandClass" value="za.co.standardbank.sbg.cda.mvc.portlet.domain.ContactMeInfo" />
+		<property name="formView" value="contactmeInsert"></property>
+		<property name="successView" value="contactmeList"></property>
+		<property name="validator" ref="contactValidator" />
+	</bean>
+
+	<!-- Following controllers are not required now. 
+		Can be useful in case data related 'Contact Me' forms is maintained by SB. -->
+	<!--
+	<bean id="listController" class="za.co.standardbank.sbg.cda.mvc.portlet.controller.ContactMeListController"/>
+
+	<bean id="updateController" class="za.co.standardbank.sbg.cda.mvc.portlet.controller.ContactMeUpdateController">
+		<property name="commandName" value="contactmeInfo"/>
+		<property name="commandClass" value="za.co.standardbank.sbg.cda.mvc.portlet.domain.ContactMeInfo" />
+		<property name="formView" value="contactmeUpdate"></property>
+		<property name="successView" value="contactmeList"></property>
+		<property name="validator" ref="contactValidator" />
+	</bean>
+
+	<bean id="deleteController" class="za.co.standardbank.sbg.cda.mvc.portlet.controller.ContactMeDeleteController">
+		<property name="commandClass" value="za.co.standardbank.sbg.cda.mvc.portlet.domain.ContactMeInfo" />
+	</bean>
+	-->
+	<!-- End of Controllers Declaration -->
+	
+	<!-- Validators -->
+	<bean id="contactValidator" class="za.co.standardbank.sbg.cda.mvc.portlet.validation.ContactMeValidator"/>
+	<!-- End of Validators Declaration -->
+
+	<!-- Mappers for resolving views -->
+
+	<bean id="portletModeHandlerMapping" class="org.springframework.web.portlet.handler.PortletModeHandlerMapping">
+		<property name="order" value="2" />
+		<property name="portletModeMap">
+			<map>
+				<entry key="view">
+					<ref bean="insertController" />
+				</entry>
+				<entry key="config">
+					<ref bean="configController" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- Following portletModeParameterHandlerMapping will be useful in case we have multiple views.
+		Entries are kept for future reference.
+	-->
+	<!-- 
+	<bean id="parameterMappingInterceptor" class="org.springframework.web.portlet.handler.ParameterMappingInterceptor" />
+	<bean id="portletModeParameterHandlerMapping" class="org.springframework.web.portlet.handler.PortletModeParameterHandlerMapping">
+		<property name="order" value="1" />
+		<property name="interceptors">
+			<list>
+				<ref bean="parameterMappingInterceptor" />
+			</list>
+		</property>
+		<property name="portletModeParameterMap">
+			<map>
+				<entry key="view">
+					<map>
+						<entry key="list">
+							<ref bean="listController" />
+						</entry>
+						<entry key="insert">
+							<ref bean="insertController" />
+						</entry>
+						<entry key="update">
+							<ref bean="updateController" />
+						</entry>
+						<entry key="delete">
+							<ref bean="deleteController" />
+						</entry>
+					</map>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	-->
+	<!-- End of declaration of Mappers for resolving views -->
+
+	<!-- Exception handling -->
+	<bean id="defaultExceptionHandler" parent="defaultExceptionHandlerTemplate" />
+
+	<bean id="defaultExceptionHandlerTemplate" class="org.springframework.web.portlet.handler.SimpleMappingExceptionResolver" abstract="true">
+		<property name="defaultErrorView" value="error" />
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">
+					contactmeError
+				</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- End of Exception handling -->
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>										
+	</bean>
+</beans>

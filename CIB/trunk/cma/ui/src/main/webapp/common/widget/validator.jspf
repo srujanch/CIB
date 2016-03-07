@@ -1,0 +1,77 @@
+
+<%@ page import="com.vignette.wcm.widgets.base.validation.ValidationDef"%>
+<%@ page import="com.vignette.ui.vcm.widget.renderer.ValidatableRenderer"%>
+<%@ page import="com.vignette.ui.util.StringUtil"%>
+<%@ page import="com.vignette.as.client.common.DataType" %>
+<%@ page import="com.vignette.ui.util.ResourceUtil" %>
+<%@ page import="com.vignette.ui.vcm.widget.renderer.HiddenRenderer" %>
+<%
+	// Make sure we have a validator
+	if ( !ValidatableRenderer.class.isInstance(wr) ) {
+		return;
+	}
+
+	ValidatableRenderer vr = (ValidatableRenderer)wr;
+	String valType = vr.getValidationType();
+	if (valType == null || valType.length() == 0) {
+		valType = ValidationDef.VALIDATION_TYPE_KEY_NONE;
+	}
+
+	// Make sure we have a validation type
+	if ( !ValidationDef.VALIDATION_TYPE_KEY_NONE.equals(valType) ) {
+		String valExpr = StringUtil.jsEscape(StringUtil.htmlEscape(vr.getValidationExpr()));
+		String valExprOther = StringUtil.jsEscape(StringUtil.htmlEscape(vr.getValidationExprOther()));
+		int    failMsgType = vr.getFailureMessageType();
+		String failMsgExpr = StringUtil.jsEscape(StringUtil.htmlEscape(vr.getFailureMessageExpr()));
+%>
+		<%-- add a creator-pattern for validators too --%>
+		validators.push(new vui.vcm.ui.editor.widget.validator.Validator({
+			valid: <%= !isNew %>,
+			validationType: "<%= valType %>",
+			validationExpr: "<%= valExpr %>",
+			validationExprOther: "<%= valExprOther %>",
+			failureMsgType: <%= failMsgType %>,
+			failureMsgExpr: "<%= failMsgExpr %>"
+		}));
+<%
+	}
+
+	// Add the "required" validator and "data type" validator only for NON autogen attributes and non hidden widgets/attributes.
+	if (!(wr.getData().getAutoGen() || HiddenRenderer.class.isInstance(wr) || wr.isRelator())) {
+		// Add Required validator.
+		if (wr.getData().getRequired()) {
+		%>
+		validators.push(new vui.vcm.ui.editor.widget.validator.Validator({
+			valid: <%= !isNew %>,
+			validationType: "<%=ValidationDef.VALIDATION_TYPE_KEY_REQUIRED%>",
+			failureMsgType: 0,
+			failureMsgExpr: "<%=ResourceUtil.getMessage(com.vignette.ui.vcm.l10n.WidgetResource.BASE_NAME, request.getLocale(), com.vignette.ui.vcm.l10n.WidgetResource.WIDGET_VALIDATION_REQUIRED_MSG)%>"
+		}));
+	<%	}
+
+		// Add "data type" validator.
+		DataType attrDataType = wr.getData().getDataType();
+		boolean addDTValidator = false;
+		if (attrDataType.isInt() || attrDataType.isTinyInt()) {
+			addDTValidator = true;
+	%>
+			attributeDataType = vui.vcm.ui.editor.widget.validator.DATA_TYPE_KEY_INT;
+	<%	} else if (attrDataType.isDecimal()) {
+			addDTValidator = true;
+	%>
+			attributeDataType = vui.vcm.ui.editor.widget.validator.DATA_TYPE_KEY_DEC;
+	<%	} else if (attrDataType.isDate()) {
+			addDTValidator = true;
+	%>
+			attributeDataType = vui.vcm.ui.editor.widget.validator.DATA_TYPE_KEY_DATE;
+	<%	}
+		if (addDTValidator) {%>
+			validators.push(new vui.vcm.ui.editor.widget.validator.Validator({
+				valid: <%= !isNew %>,
+				validationType: "<%=ValidationDef.VALIDATION_TYPE_KEY_DATA_TYPE%>",
+				validationExpr: attributeDataType,
+				failureMsgType: 0,
+				failureMsgExpr: "<%=ResourceUtil.getMessage(com.vignette.ui.vcm.l10n.WidgetResource.BASE_NAME, request.getLocale(), com.vignette.ui.vcm.l10n.WidgetResource.WIDGET_VALIDATION_DATATYPE_MSG, attrDataType.getDisplayName())%>"
+			}));
+	<%	}
+	}%>

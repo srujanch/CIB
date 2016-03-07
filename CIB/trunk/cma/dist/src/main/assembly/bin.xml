@@ -1,0 +1,73 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>README.txt</include>
+                <include>LICENSE.txt</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/sql</directory>
+            <outputDirectory>/sql</outputDirectory>
+            <excludes>
+                <exclude>drop*</exclude>
+            </excludes>
+        </fileSet>
+		<fileSet>
+            <directory>src/main/CMAexports</directory>
+            <outputDirectory>/CMAexports</outputDirectory>
+        </fileSet>
+		<fileSet>
+            <directory>src/main/appsvcs-extensions-81-assets</directory>
+            <outputDirectory>/appsvcs-extensions-81-assets</outputDirectory>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+                <include>za.co.standardbank:sbsa-sbg-cma-core</include>
+                <include>za.co.standardbank:sbsa-sbg-cma-migrate-tool</include>
+            </includes>
+            <outputDirectory>/lib</outputDirectory>
+        </dependencySet>
+        <dependencySet>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+                <include>za.co.standardbank:sbg-ui-extensions</include>
+                <include>za.co.standardbank:sbg-wcm-up</include>
+            </includes>
+            <outputDirectory>/war</outputDirectory>
+        </dependencySet>
+        <!-- <dependencySet>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+                <include>za.co.standardbank:sbsa-sbg-cma-package-ctd
+                </include>
+            </includes>
+            <outputDirectory>/package</outputDirectory>
+        </dependencySet> -->
+        <!-- <dependencySet>
+            <unpack>true</unpack>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+                <include>za.co.standardbank:sbsa-sbg-docs</include>
+            </includes>
+            <outputDirectory>/docs</outputDirectory>
+        </dependencySet> -->
+    </dependencySets>
+</assembly>

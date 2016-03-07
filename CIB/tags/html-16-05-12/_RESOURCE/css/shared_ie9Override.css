@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* ie Override CSS Document */
+
+@media screen {
+/* TO ENABLE TESTING IF THIS STYLESHEET IS CALLED HEADERS CHANGE COLOR .headerSBG_CIB h1 a {color:red;}*/ 
+#dropMenu li:hover div a {background:#F4F4F4 !important;filter:none;}
+.errorMsg .searchBar input[type="text"]{display:block; float:left; }
+.errorPages input[type="submit"]{display:block; float:left;}
+.hpgVer3 #shareTicker .shareInfo #ticker{position:relative;}
+}

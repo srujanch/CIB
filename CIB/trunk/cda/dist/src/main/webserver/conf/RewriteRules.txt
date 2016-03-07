@@ -1,0 +1,26 @@
+RewriteEngine on
+RewriteLog logs/rewrite.log
+RewriteLogLevel 3
+
+RewriteRule ^/portal/console - [F,L]
+RewriteRule ^/portal/system - [F,L]
+RewriteRule ^/vgn-ext-templating/vgnTest.jsp - [F,L]
+RewriteRule ^/vgn-ext-templating/vapSites.jsp - [F,L]
+RewriteRule ^/vgn-ext-templating/vapSitesDisplay.jsp - [F,L]
+RewriteRule ^/vgn-ext-templating/whichJar.jsp - [F,L]
+RewriteRule ^/vgn-ext-templating/link.jsp - [F,L]
+RewriteRule ^/vgn-ext-templating/environmentData.jsp - [F,L]
+RewriteRule ^/vgn-ext-templating/CPSAssetUtil.jsp - [F,L]
+
+RewriteRule ^/$ /cib [P,L,NC]
+RewriteRule ^/fxtrader/Home$ /fxtrader [P,L,NC]
+RewriteRule ^/fxtrader/Home/Welcome$ /fxtrader [P,L,NC]
+RewriteRule ^/fxtrader/getting_started/Overview$ /fxtrader/getting_started [P,L,NC]
+RewriteRule ^/fxtrader/Trading/Overview$ /fxtrader/Trading [P,L,NC]
+RewriteRule ^/fxtrader/Platforms/Overview$ /fxtrader/Platforms [P,L,NC]
+RewriteRule ^/fxtrader/Education_centre/Overview$ /fxtrader/Education_centre [P,L,NC]
+RewriteRule ^/fxtrader/Resources/Overview$ /fxtrader/Resources [P,L,NC]
+RewriteRule ^/fxtrader/Support$ /fxtrader/Support/contact [P,L,NC]
+RewriteRule ^/fxtrader/Home/Contact_us$ /fxtrader/Support/contact [P,L,NC]
+RewriteRule ^/fxtrader/getting_started/fundInstrPage$ /fxtrader/Support/Funding_your_account [P,L,NC]
+RewriteRule ^/fxtrader/Resources/My_account$ /fxtrader/Support/My_account [P,L,NC]

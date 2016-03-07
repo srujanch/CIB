@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>SBSA Youth Portal CMA Package</name>
+    <description>Contains all vgnimport/export package definitions, such as Content Type Definition packageBody file(s). These are maintained in SVN and assembled into by the cma dist project as part of the build process.</description>
+    <artifactId>sbsa-yp-cma-package</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>za.co.standardbank</groupId>
+        <artifactId>sbsa-yp-cma</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>../src/assembly/bin.xml</descriptor>
+                        </descriptors>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <modules>
+        <module>ctd</module>
+    </modules>
+
+</project>

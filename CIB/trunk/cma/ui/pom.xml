@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>SBSA GreenField CMA User Interface</name>
+    <description>VCM User Interface extension webapp. Contains all JSPs and supporting code necessary for customising the new VCM UI.</description>
+    <artifactId>sbg-ui-extensions</artifactId>
+    <packaging>war</packaging>
+    <parent>
+        <groupId>za.co.standardbank</groupId>
+        <artifactId>sbsa-sbg-cma</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vcm-ui</artifactId>
+            <type>war</type>
+        </dependency>
+        <!-- <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>cps</artifactId>
+            <type>war</type>
+        </dependency> -->
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <overlays>
+                        <overlay>
+                            <groupId>com.vignette</groupId>
+                            <artifactId>vcm-ui</artifactId>
+                            <includes>
+								<include>flash/**/*.*</include>
+								<include>properties/**/*.*</include>
+								<include>style/**/*.*</include>
+								<include>WEB-INF/lib/*.*</include>
+                                <include>theme/corporate/template/**/*.*</include>
+                            </includes>
+                        </overlay>
+                        <!-- <overlay>
+                            <groupId>com.vignette</groupId>
+                            <artifactId>cps</artifactId>
+                            <includes>
+                                <include>WEB-INF/lib/*.*</include>
+                            </includes>
+                        </overlay> -->
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+		<finalName>${artifactId}</finalName>
+    </build>
+</project>

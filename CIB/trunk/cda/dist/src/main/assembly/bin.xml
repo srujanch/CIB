@@ -1,0 +1,196 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <outputDirectory>../</outputDirectory>
+            <includes>
+                <include>README.txt</include>
+                <include>LICENSE.txt</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/config</directory>
+            <outputDirectory>/config</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/vgn-furl</directory>
+            <outputDirectory>/vgn-furl</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/portal</directory>
+            <outputDirectory>/portal</outputDirectory>
+        </fileSet>		
+		<fileSet>		
+            <directory>src/main/car</directory>
+            <outputDirectory>/car/site</outputDirectory>
+        </fileSet> 
+		<fileSet>		
+            <directory>../search/</directory>
+            <outputDirectory>/search</outputDirectory>
+        </fileSet>
+		<fileSet>
+            <directory>src/main/webserver</directory>
+            <outputDirectory>/Apachewebserver</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <!-- <dependencySet>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-portlettype-common
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-portlettype-poll
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-grid-main
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-error
+                </include>
+				 <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-grid-xml
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-page-display
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-login
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-logout
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-register
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-forgotten-password
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-user-message
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-user-change-password
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-refer-friend
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-bookmark
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-style-account-controls
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-account-deactivate
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-grid-main
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-grid-tools
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-grid-xml
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-grid-empty
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-error
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-bookmark
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-page-display
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-login
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-logout
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-register
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-forgotten-password
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-user-message
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-my-account
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-user-rating
+                </include>
+				 <include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-refer-friend
+                </include>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-web-style-account-controls
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-secpagetype-user-rating
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-secpagetype-refer-friend
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-secpagetype-user-change-password
+                </include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-secpagetype-account-deactivate
+                </include>
+				
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-my-account
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-my-account-communication
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-update-profile
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-mobile-secpage-verifyRegistration
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-secpagetype-my-account-communication
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-secpagetype-quick-registration
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-secpagetype-verify-registration
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-account-deactivate
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-my-account-communication
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-quick-register
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-user-change-password
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-secpage-verifyRegistration
+				</include>
+				<include>za.co.standardbank:sbsa-sbg-cda-portal-web-grid-dashboard
+				</include>
+				</includes>
+            <outputDirectory>/car/component</outputDirectory>
+        </dependencySet> -->
+
+		<dependencySet>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+                <include>za.co.standardbank:sbsa-sbg-cda-portal-core</include>
+            </includes>
+            <outputDirectory>/lib</outputDirectory>
+        </dependencySet>
+
+        <dependencySet>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+               <!--  <include>za.co.standardbank:portlet-poetry-competition
+                </include>
+                <include>za.co.standardbank:portlet-photo-competition
+                </include>
+				-->
+                <include>za.co.standardbank:sbg-fxt-portlet-contact-me</include>
+				<include>za.co.standardbank:vgn-ext-templating</include>
+                <!-- <include>za.co.standardbank:vgn-community-services
+                </include>
+                <include>za.co.standardbank:vgn-community-applications
+                </include> -->
+            </includes>
+            <outputDirectory>/war</outputDirectory>
+        </dependencySet>
+
+        <!-- <dependencySet>
+            <unpack>true</unpack>
+            <outputFileNameMapping>
+                ${artifact.artifactId}.${artifact.extension}
+            </outputFileNameMapping>
+            <includes>
+                <include>za.co.standardbank:sbsa-sbg-docs</include>
+            </includes>
+            <outputDirectory>/docs</outputDirectory>
+        </dependencySet> -->
+
+    </dependencySets>
+
+
+
+
+</assembly>

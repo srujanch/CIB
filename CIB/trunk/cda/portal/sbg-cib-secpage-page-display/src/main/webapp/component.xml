@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epideploy:component build-version="Gold" component-id="caaYTRZZUbWeQRaVYTeTXTUVcXfYRZaQ" component-type="Secondary Pages" description="SBG CIB Page Display" epi-build="688968" epi-version="8.1" major-version="1" minor-version="0" title="SBG CIB Page Display" xmlns:epideploy="http://www.epicentric.com/deployment">
+ <epideploy:required-component component-id="template0018" component-type="Secondary Page Types" major-version="8" minor-version="1"/>
+ <epideploy:detail>
+  <style-info apply-template-header="false" description="SBG CIB Page Display" friendly-id="sbgCIBPageDisplay" id="caaYTRZZUbWeQRaVYTeTXTUVcXfYRZaQ" is-system="false" primary-filename="sbgCIBPageDisplay.jsp" processing-type="ACTION_BASED" secure="false" template-default="false" template-uid="template0018" title="SBG CIB Page Display" visible="true">
+   <actions>
+    <group-reference group-id="INHERIT_ALL"/>
+   </actions>
+  </style-info>
+ </epideploy:detail>
+</epideploy:component>

@@ -1,0 +1,12 @@
+@charset "utf-8";
+/*Screen Based CSS Document */
+@media print {
+.site-banner-print{display:block;}
+#topBar, #leftNav, #navBar, #crumbBar .shortLinks, .homePage #mainPromo, .homePage.maxi #shareTicker .shareInfo, .homePage #rightContent, .homePage #shareTicker  { display:none;}
+.homePage #content {padding: 15px 0 0 19px; float:left;width: 100% !important;}
+.homePage.maxi #information #deals, .homePage.maxi #information #news {width: 340px !important;}
+.homePage #information #accolades {float: right;width: 247px;}
+#pageContentFrame {position: inherit;top: auto;}
+	.site-banner-print .site-country {float: left;font-size: 12px !important;left: 376px;position: absolute;text-align: left;top: 30px;}
+	.site-banner-print .site-header {display:none;}
+}

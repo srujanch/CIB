@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<json>
+	<item>
+		<stockName>JSE</stockName>
+		<stockPrice>27702</stockPrice>
+		<status>up</status>
+	</item>
+	<item>
+		<stockName>Nasdaq</stockName>
+		<stockPrice>2367.52 +</stockPrice>
+		<status>up</status>
+	</item>
+	<item>
+		<stockName>FTSE</stockName>
+		<stockPrice>2868.6 -</stockPrice>
+		<status>down</status>
+	</item>
+	<item>
+		<stockName>Dax</stockName>
+		<stockPrice>6427.30 +</stockPrice>
+		<status>up</status>
+	</item>
+	<item>
+		<stockName>Cac40</stockName>
+		<stockPrice>4488.60 -</stockPrice>
+		<status>down</status>
+	</item>
+	<item>
+		<stockName>Standard Bank</stockName>
+		<stockPrice>10375c +</stockPrice>
+		<status>up</status>
+	</item>
+	<item>
+		<stockName>JSE</stockName>
+		<stockPrice>27702</stockPrice>
+		<status>up</status>
+	</item>
+	<item>
+		<stockName>Nasdaq</stockName>
+		<stockPrice>2367.52 +</stockPrice>
+		<status>up</status>
+	</item>
+	<item>
+		<stockName>FTSE</stockName>
+		<stockPrice>2868.6 -</stockPrice>
+		<status>down</status>
+	</item>
+	<item>
+		<stockName>Dax</stockName>
+		<stockPrice>6427.30 +</stockPrice>
+		<status>up</status>
+	</item>
+	<item>
+		<stockName>Cac40</stockName>
+		<stockPrice>4488.60 -</stockPrice>
+		<status>down</status>
+	</item>
+	<item>
+		<stockName>Standard Bank</stockName>
+		<stockPrice>10375c +</stockPrice>
+		<status>up</status>
+	</item>
+</json>

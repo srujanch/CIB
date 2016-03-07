@@ -1,0 +1,1 @@
+<H1> In SBG CIB Site, only column oriented Layout is supported(on Portal page). Please select column layout for the current portal page.</H1>

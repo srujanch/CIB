@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee                                                                                          
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" >
+	<listener>
+		<listener-class>com.vignette.ui.web.lifecycle.BasicServletContextListener</listener-class>
+	</listener>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Blocked</web-resource-name>
+			<description>Blocked resources</description>
+			<url-pattern>*.properties</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>Blocked</description>
+			<role-name>Blocked</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-role>
+		<description>Blocked</description>
+		<role-name>Blocked</role-name>
+	</security-role>
+
+	<security-role>
+		<description>VignetteUser</description>
+		<role-name>VignetteUser</role-name>
+	</security-role>
+</web-app>

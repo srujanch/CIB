@@ -1,0 +1,90 @@
+Release Updates
+
+  The update process outlined below differs from the install process, in that 
+  it assumes that the SBSA application has already been installed on the 
+  target environment.
+  Preparation is similar to initial install, creating an svn tag and building with  mvn clean install
+
+* Content Management Application
+
+** Steps
+  
+  [[1]] Copy sbsa-yp-cma-dist-*-bin.tar.gz assembly to stage directory and 
+  untar with following command:
+
+------
+tar xzf sbsa-yp-cda-dist-1.0.*-bin.tar.gz
+------
+
+  [[2]] Using configp or cfgaction, deploy extension jar sbsa-yp-cma-core.jar
+  
+  [[3]] Using configp or cfgaction, deploy extension war sbsa-yp-cma-ext.war
+  
+  [[4]] Run any database alter scripts.
+
+  [[5]] Use vgnimport to import the CTD definitions contained in the
+  /package/sbsa-yp-cma-package-ctd.zip file if necessary
+
+
+* Content Delivery Application
+
+** Steps
+	 
+  [[1]] For Preview, Copy cda dist assembly to stage directory and untar with following command:
+
+------
+tar xzf cda-1.0.*-bin.tar.gz
+------
+
+	This is not required for For Delivery, as we can ftp files from the Preview stage (note that in Production, sftp may not be able to connect from 
+	delivery to preview due to firewall restrictions, so files need to be pushed instead of pulled)
+
+  [[2]] Backup existing exploded webapps in <tomcat install dir>/webapps (consider tar'ing the complete directory)
+
+  [[3]]	Stop tomcat
+
+  [[4]] Update configuration if necessary (eg/opt/sbsa/cda.properties)
+
+  [[5]] Delete the following existing webapps (wars & exploded directories) :
+
+	*	vgn-ext-templating
+	
+	*	vgn-community-applications
+	
+	*	vgn-community-services
+
+	*	portlet-contact-me
+
+  [[6]] Delete cache for these webapps from tomcat work directory
+
+  [[7]] Copy or ftp new webapps from exploded package war directory to <tomcat install dir>/webapps
+
+  [[8]]	Delete content of  DPM cache directory. If unsure of its location, go to/vgn-ext-templating/vgnTest.jsp in browser. 
+          Value is shown approx 30% down the page,  eg
+
+------
+Preview : object.cache.cacheDir=
+/opt/vignette/vcm_working/inst-vgninst/cfgagent/vcm-vgninst/cdsvcs/stage-mgmt/cds-mgmt/as/dpm/cache/ObjectCache
+
+Delivery: object.cache.cacheDir=
+/opt/vignette/cds_working/vcm-vgninst/cdsvcs/stage-YouthPorta/cds-YouthPorta/as/dpm/cache/ObjectCache
+------
+
+  [[9]] If components have been updated copy or ftp all cars in ./cars/* _EXCEPT_ site cars (eg. web.car and mobile.car)
+  to <portal install dir>/deployment/upload.
+  Note: If deploying cars to a   cluster, they only need to be deployed to a single node (however, both nodes must be restarted in sequence - refer portal documentation for more detalis if required)
+
+  [[10]] Update <cda stage install dir>/conf/cda.properties if necessary.
+
+  [[11]] Production Delivery only - Update main grid to uncomment baynote include
+
+  [[12]] Production Delivery only - Update site catalyst URL in ypsa_s_code.js to use production value
+
+  [[13]] Restart tomcat twice
+
+  [[14]] From the portal console, import any sites that are to be redeployed. 
+  Although site car files can also be deployed automatically from the portal 
+  upload directory, it is useful to deploy from the console as a report is provided.
+  Note: If deploying cars to a cluster, they only need to be deployed to a 
+  single node (however, both nodes must be restarted in sequence - refer portal 
+  documentation for more detalis if required)

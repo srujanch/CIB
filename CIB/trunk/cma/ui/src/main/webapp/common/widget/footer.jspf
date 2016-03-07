@@ -1,0 +1,55 @@
+<script type="text/javascript">
+vui.ready(function(){
+	var validators = [];
+	var attributeDataType;
+	
+<%@ include file="validator.jspf" %>
+
+	var widgetConfig = {
+		validators: validators,
+		id: "<%= widgetId %>",
+		dataId: "<%= vcmId %>",
+		fieldId: "<%= fieldId %>",
+		value: "<%= value %>",
+		dataType: attributeDataType,
+		considerDefault: <%= considerDefault%>,
+		groupName: '<%= groupName %>'
+	};
+	var widget = vui.ui.editor.widget.create('<%=widgetType%>', widgetConfig);
+
+<%
+	if ( postCreate ) {
+%>
+	widget.postCreate = vui.scope(widget, vExt.getCmp('<%= fieldId %>').vgnPostCreate);
+<%
+	}
+%>
+	vui.ui.editor.addWidget("<%= editorId %>", widget);
+
+	var field = vQuery("#<%= fieldId %>");
+
+<%
+	if ( fieldValidation ) {
+%>		
+	// by default, validate on blur
+	field.bind('blur', widget, vui.scope(widget, widget.validate));
+<%
+	}
+
+	if ( readOnly ) {
+%>
+	// add readonly CSS class
+	field.addClass('vui-widget-readonly');
+<%
+	}
+%>
+
+<% if (tooltip.length() > 0) { %>
+	var tooltip = new vui.vext.Tooltip({
+		id: '<%= widgetId %>-tooltip',
+		applyTo: '<%= widgetId %>-tooltip',
+		qtip: '<%= tooltip %>'
+	});
+<% } %>
+});
+</script>

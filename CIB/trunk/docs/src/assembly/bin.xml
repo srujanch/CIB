@@ -1,0 +1,33 @@
+<assembly>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+
+  <files>
+    <file>
+      <source>src/site/apt/build.apt</source>
+      <destName>build.txt</destName>
+    </file>
+    <file>
+      <source>src/site/apt/code.apt</source>
+      <destName>code.txt</destName>
+    </file>
+    <file>
+      <source>src/site/apt/install.apt</source>
+      <destName>install.txt</destName>
+    </file>
+    <file>
+      <source>src/site/apt/release.apt</source>
+      <destName>release.txt</destName>
+    </file>
+    <file>
+      <source>target/generated-site/pdf/sbsa-yp-development-guide/sbsa-yp-development-guide.pdf</source>
+      <destName>sbsa-yp-development-guide.pdf</destName>
+    </file>
+    <file>
+      <source>target/generated-site/pdf/sbsa-yp-deployment-guide/sbsa-yp-deployment-guide.pdf</source>
+      <destName>sbsa-yp-deployment-guide.pdf</destName>
+    </file>
+  </files>
+</assembly>

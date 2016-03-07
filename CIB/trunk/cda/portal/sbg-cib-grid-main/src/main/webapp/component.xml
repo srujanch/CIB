@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epideploy:component build-version="Gold" component-id="TWeSWcaYfYeYTQaVYTeTXTUVcXfYRZaQ" component-type="Grids" description="SBG CIB Main Grid" epi-build="688968" epi-version="8.1" major-version="1" minor-version="0" title="SBG CIB Main Grid" xmlns:epideploy="http://www.epicentric.com/deployment">
+ <epideploy:required-component component-id="template0005" component-type="Style Types" major-version="4" minor-version="5183"/>
+ <epideploy:detail>
+  <style-info apply-template-header="false" description="SBG CIB Main Grid" friendly-id="sbgCIBMainGrid" id="TWeSWcaYfYeYTQaVYTeTXTUVcXfYRZaQ" is-system="false" primary-filename="sbgCIBMainGrid.jsp" processing-type="JSP_BASED" secure="false" template-default="false" template-uid="template0005" title="SBG CIB Main Grid" visible="true"/>
+ </epideploy:detail>
+</epideploy:component>

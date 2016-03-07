@@ -1,0 +1,215 @@
+Code
+  
+  This document outlines the code structure and conventions/patterns for the SBSA
+  project. It is important that new developers familiarise themselves with this 
+  section before commencing work.
+  
+* Structure
+  
+*--------*------------------+-------------------------------------------------:
+|cda     |                  |Parent project for all CDA artifacts, including  | 
+|        |                  |Portal cars, Portlet JSR168 wars, Templating     |
+|        |                  |jars/wars, etc.                                  |
+*--------*------------------+-------------------------------------------------:
+|        |core              |The core CDA common jar file. It is packaged with|
+|        |                  |all CDA wars (eg. templating war, portal cars,   |
+|        |                  |portlet war), and contains all _common_          |
+|        |                  |code/resources that are required by these wars.  |
+*--------*------------------+-------------------------------------------------:
+|        |dist              |Final CDA distribution package. Contains         |
+|        |                  |miscellaneous artifacts, such as SQL scripts for |
+|        |                  |portal, properties files, etc. During the build  |
+|        |                  |process, this project assembles all necessary    |
+|        |                  |artifacts into a single zip/tar file ready for   |
+|        |                  |deployment on an appropriate environment.        |
+*--------*------------------+-------------------------------------------------:
+|        |portal            |Contains all Portal car artifacts and common     |
+|        |                  |code. Any grids, style, secondary pages,         |
+|        |                  |PortalBean portlets types, etc should be created |
+|        |                  |as sub projects of this project.                 |
+*--------*------------------+-------------------------------------------------:
+|        |portlet           |War project for all JSR168 portlets. Any new     |
+|        |                  |JSR168 portlets should be added to this project. |
+*--------*------------------+-------------------------------------------------:
+|        |vgn-ext-templating|Vignette Templating Extension webapp. This webapp|
+|        |                  |comprises all Dynamic Portal/Site extensions,    |
+|        |                  |such as component JSPs and supporting code       |
+*--------*------------------+-------------------------------------------------:
+|cma     |                  |Parent project for all CMA artifacts, including  |
+|        |                  |VCM extension jars, wars, etc                    |
+*--------*------------------+-------------------------------------------------:
+|        |core              |Primary VCM extension jar file, containing all   |
+|        |                  |listeners, content type support classes, etc.    |
+*--------*------------------+-------------------------------------------------:
+|        |dist              |Final CMA distribution package. This project     |
+|        |                  |contains miscellaneous artifacts, such as SQL    |
+|        |                  |scripts for content types, properties files, etc.|
+|        |                  |During the build process, this project assembles |
+|        |                  |all necessary artifacts into a single zip/tar    |
+|        |                  |file ready for deployment on an appropriate      |
+|        |                  |environment.                                     |
+*--------*------------------+-------------------------------------------------:
+|        |ext               |VCM extension webapp. Contains all JSPs and      |
+|        |                  |supporting code necessary for customising the VCM|
+|        |                  |console.                                         |
+*--------*------------------+-------------------------------------------------:
+|        |package           |Contains all vgnimport/export package            |
+|        |                  |definitions, such as Content Type Definition     |
+|        |                  |packageBody file(s). These are maintained in SVN |
+|        |                  |and assembled into by the cma dist project as    |
+|        |                  |part of the build process.                       |
+*--------*------------------+-------------------------------------------------:
+|docs    |                  |Contains all documentation for the SBSA project. |
+|        |                  |This documentation is currently maintained in the|
+|        |                  |Almost Plain Text (APT) format. It can then be   |
+|        |                  |delivered in a number of different formats, such |
+|        |                  |as HTML, PDF, via usage of the maven Doxia       |
+|        |                  |plugin.                                          |
+*--------*------------------+-------------------------------------------------:
+
+* Getting Started
+
+  New developers should carry out the following steps before commencing work:
+  
+  [[1]] Install the following software on development machine:
+  
+    * maven
+    
+    * svn client
+
+    * svn-win32-1.4.6
+    
+    * IDE (eg. Eclipse)
+  
+  [[2]] Checkout the following project from SVN:
+  
+------
+http://hq-vps-svn/svn/VPS_EMEA/Standard%20Bank/Youth%20Portal/
+------  
+  
+  [[3]] Copy the settings.sample.xml file to the .m2 root folder on your system
+  and rename it to settings.xml.
+  
+  [[4]] Run an initial build to ensure that all artifacts are downloaded from
+  the SBSA maven and third-party repositories.
+  
+------
+mvn clean package
+------
+
+  [[5]] If using eclipse, do the following:
+  
+    [[a]] add the maven repository variable to your workspace
+  with the following command:
+  
+------
+mvn -Declipse.workspace=<path-to-eclipse-workspace> eclipse:add-maven-repo
+------
+  
+    [[b]] Run the following command to create eclipse project
+  files.
+  
+------
+mvn eclipse:eclipse
+------
+
+    [[c]] Import relevant projects into eclipse using "Import > Existing Projects
+    Into Workspace".    
+
+
+* Conventions/Patterns
+
+  * The following base package name is used for java code:
+  
+------
+za.co.standardbank.youthportal
+------
+
+  * Where possible, the following package suffix names are used:
+  
+------
+*.domain - for all domain objects
+*.service - for any available services
+*.web - for any presentation code pertaining to web delivery
+*.portlet - for any presentation code pertaining to portlet delivery
+------
+  
+  * A single war file is used for all JSR168 portlets. When building new JSR168 
+  portlets, simply add portlet definition to portlet.xml file in the existing
+  portlet project (ie. do NOT create a new webapp project per portlet).
+  
+  * All Portal car projects are found as subprojects of the "portal" project.
+  When building new Portal components (grids, secondary pages, etc), use the
+  following steps to incorporate it into the code structure:
+  
+  [[1]] Add a new project under the "portal" project, and create a minimum
+  folder structure including src/main/webapp.
+  
+  [[2]] Create a new pom.xml file for this project, using an existing pom file
+  as a template.
+  
+  [[3]] Create the component in the Portal console, providing all appropriate
+  metadata (name, friendlyId, etc) as required
+  
+  [[4]] Export this component as a car file.
+  
+  [[5]] Extract the contents of this car file into the src/main/webapp folder
+  of the new project.
+
+  []
+
+  * Taglibs - Two taglibs exist for the SBSA portal site:
+  
+  [[a]] cda\core\src\main\resources\META-INF\sbsa.tld - contains common taglib 
+  definitions that are available across _ALL_ webapps
+  
+  [[b]] cda\templating\core\src\main\resources\META-INF\sbsa-templating.tld - contains
+  taglib definitions specific for the vgn-ext-templating webapp.
+
+  []
+
+  * ContentBeans - Vignette VCM 8.0 provides a new mechanism for generating
+  content beans for use in delivery applications. The usage of ContentBeans and
+  JSTL is the preferred presentation code paradigm.
+  
+  * CTD XML Names - if CTD XML names or XML attribute names are required in
+  code, the static constants are to be used, found in the sbsa-yp-cma-core 
+  jar project. An example class is
+  
+------
+za.co.standardbank.youthportal.cma.content.ArticleInstance
+------
+
+  Be aware that other bean extension code can be added to these classes. 
+  According to ContentBeans docs, if annotation @ContentBeanMethod is used, then
+  the code is also available in the auto-generated beans - magic!
+  
+  * ServiceLocator Pattern - a service layer exists in the following jar file project:
+  
+------
+  trunk\cda\core
+------
+
+  The service layer includes services such as ConfigurationService, ContentService,
+  SearchService, CommunityService, etc. To obtain a handle to a particular service,
+  use code similar to the example shown below:
+  
+------
+ConfigurationService configService = (ConfigurationService) SpringServiceLocator.getInstance().getService("configurationService");
+------
+  
+  Note: If you need to add new configurable properties to the ConfigurationService,
+  please add to the master cda.properties file in SVN:
+  
+------
+cda\dist\src\main\config\cda.properties
+------ 
+  
+  * Listener Pattern - if Listeners are required for VCM, a pattern is used in 
+  which a single generic listener (GenericEventListener) is registered with the
+  VCM config console. Any Content Types requiring Listeners must then include
+  a CTD subclass that implements the interface "ContentListener". These CTD
+  classes must then include appropriate method implementations for 
+  pre-/post-persistence events, etc.
+  
+  

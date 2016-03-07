@@ -1,0 +1,25 @@
+<book>
+    <id>sbsa-yp-deployment-guide</id>
+    <title>SBSA Youth Portal Development Guide</title>
+    <author>John Egan</author>
+    <chapters>
+        <chapter>
+            <id>guide</id>
+            <title>SBSA Youth Portal Deployment Guide</title>
+            <sections>
+                <section>
+                    <id>introduction</id>
+                </section>
+                <section>
+                    <id>build</id>
+                </section>
+                <section>
+                    <id>install</id>
+                </section>
+                <section>
+                    <id>release</id>
+                </section>
+            </sections>
+        </chapter>
+    </chapters>
+</book>

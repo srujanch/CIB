@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+  <body>
+    <menu ref="parent"/>
+    <menu name="Overview">
+      <item name="Code" href="code.html"/>
+      <item name="Build" href="build.html"/>
+      <item name="Install" href="install.html"/>
+      <item name="Release" href="release.html"/>
+    </menu>
+  
+    <menu ref="reports"/>
+  </body>
+</project>

@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>SBSA GreenField CMA Dist</name>
+    <description>Final CMA distribution package. Contains miscellaneous artifacts, such as SQL scripts for content types, properties files, etc. During the build process, this project assembles all necessary artifacts into a single zip/tar file ready for deployment on an appropriate environment.</description>
+    <artifactId>sbsa-sbg-cma-dist</artifactId>
+    <parent>
+        <groupId>za.co.standardbank</groupId>
+        <artifactId>sbsa-sbg-cma</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/bin.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-core</artifactId>
+			<scope>compile</scope>
+        </dependency>
+		<dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-migrate-tool</artifactId>
+			<scope>compile</scope>
+        </dependency>
+		<dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbg-ui-extensions</artifactId>
+            <type>war</type>
+        </dependency>
+		<dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbg-wcm-up</artifactId>
+            <type>war</type>
+        </dependency>
+        <!-- <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-ext</artifactId>
+            <type>war</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-package-ctd</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-docs</artifactId>
+            <type>zip</type>
+        </dependency> -->
+    </dependencies>
+</project>

@@ -1,0 +1,48 @@
+<%@ page import="com.vignette.ui.vcm.widget.renderer.WidgetRenderer" %>
+<%@ page import="com.vignette.ui.vcm.widget.renderer.AbstractRenderer" %>
+<%@ page import="com.vignette.ui.core.editor.Editor" %>
+<%@ page import="com.vignette.ui.util.ResourceUtil" %>
+<%@ page import="com.vignette.ui.util.StringUtil" %>
+<%@ page import="com.vignette.ui.util.IdUtil" %>
+<%@ page import="com.vignette.wcm.widgets.base.auth.AuthorizedDef" %>
+<%@ page import="com.vignette.ui.vcm.l10n.EditorResource" %>
+<%@ page import="com.vignette.ui.util.LocaleUtil" %>
+<%@ page import="com.vignette.ui.core.request.Context" %>
+<%@ page import="com.vignette.ui.service.ServiceFactory" %>
+<%
+	WidgetRenderer wr = (WidgetRenderer)request.getAttribute(WidgetRenderer.RENDERER_ATTRIBUTE);
+	String editorId = (String)request.getAttribute(Editor.ID_ATTRIBUTE);
+	boolean isNew = IdUtil.isNewEditorId(editorId);
+	boolean isClone = IdUtil.isCloneEditorId(editorId);
+
+	String vcmId = wr.getId();
+	String widgetId = editorId + "-" + wr.getHTMLId();
+	String label = StringUtil.htmlEscape(wr.getName());
+	String value = StringUtil.jsEscape(wr.getValue());
+	String helpText = StringUtil.htmlEscape(wr.getHelpText());
+	String tooltip = StringUtil.htmlEscape(wr.getTooltip());
+
+	String required = (wr.isRequired() ?
+			ResourceUtil.getMessage(EditorResource.BASE_NAME,
+					LocaleUtil.getLocale((Context)request.getAttribute(Context.CONTEXT_ATTRIBUTE)),
+					EditorResource.FORM_REQUIRED_FLAG) : 
+			"");
+
+	String groupName = wr.getGroupName();
+	if ( null == groupName ) {
+		groupName = "";
+	} else {
+		groupName = groupName.replaceAll("'", "&apos;");
+	}
+
+	AbstractRenderer ar = (AbstractRenderer)wr;
+	String authMode = ar.getAuthorizedMode(ServiceFactory.getSession(session));
+	boolean readOnly = ar.isReadOnly(isNew) || AuthorizedDef.MODE_READ_ONLY.equals(authMode);
+	boolean hidden = AuthorizedDef.MODE_HIDDEN.equals(authMode);
+	String hiddenDisplayStyle = hidden ? "style=\"display:none\"" : "";
+	boolean considerDefault = isNew && wr.hasValue();
+	boolean fieldValidation = true;
+	
+	boolean postCreate = false;
+%>
+	

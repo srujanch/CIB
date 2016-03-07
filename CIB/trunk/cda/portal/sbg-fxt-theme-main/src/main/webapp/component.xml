@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epideploy:component build-version="gold" component-id="e0e30e7867a1ec08ef469ee6c7f819a0" component-type="Themes" description="SBG FXT Theme" epi-build="707537" epi-version="8.2" major-version="1" minor-version="0" title="SBG FXT Theme" xmlns:epideploy="http://www.epicentric.com/deployment">
+ <epideploy:required-component component-id="eTVcYQYZbebSYZbVWTaZXZVWcXfYRZaQ" component-type="Styles" major-version="-1" minor-version="-1"/>
+ <epideploy:required-component component-id="XeSQUXbYZZRVZZbVWTaZXZVWcXfYRZaQ" component-type="Styles" major-version="-1" minor-version="-1"/>
+ <epideploy:required-component component-id="ZVfcQWTdUSafRZbVWTaZXZVWcXfYRZaQ" component-type="Styles" major-version="-1" minor-version="-1"/>
+ <epideploy:detail>
+  <theme>
+   <uid>e0e30e7867a1ec08ef469ee6c7f819a0</uid>
+   <title>SBG FXT Theme</title>
+   <description>SBG FXT Theme</description>
+   <friendly-id>sbgFxtTheme</friendly-id>
+   <is-system>false</is-system>
+   <visible>true</visible>
+   <style>
+    <template-uid>template0002</template-uid>
+    <style-uid>eTVcYQYZbebSYZbVWTaZXZVWcXfYRZaQ</style-uid>
+   </style>
+   <style>
+    <template-uid>template0035</template-uid>
+    <style-uid>ZVfcQWTdUSafRZbVWTaZXZVWcXfYRZaQ</style-uid>
+   </style>
+   <style>
+    <template-uid>template0008</template-uid>
+    <style-uid>XeSQUXbYZZRVZZbVWTaZXZVWcXfYRZaQ</style-uid>
+   </style>
+  </theme>
+ </epideploy:detail>
+</epideploy:component>

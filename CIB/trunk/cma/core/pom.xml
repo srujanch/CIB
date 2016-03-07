@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>SBSA GreenField CMA Core</name>
+    <description>Primary VCM extension jar file, containing all listeners, content type support classes, etc.</description>
+    <artifactId>sbsa-sbg-cma-core</artifactId>
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>za.co.standardbank</groupId>
+        <artifactId>sbsa-sbg-cma</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vgn-appsvcs-cma</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>thirdparty-combined</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+    </dependencies>
+</project>

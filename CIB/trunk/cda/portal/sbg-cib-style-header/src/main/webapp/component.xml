@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epideploy:component build-version="Gold" component-id="bTVWSdbfTWWdbQaVYTeTXTUVcXfYRZaQ" component-type="Styles" description="SBG CIB Header" epi-build="688968" epi-version="8.1" major-version="1" minor-version="0" title="SBG CIB Header" xmlns:epideploy="http://www.epicentric.com/deployment">
+ <epideploy:required-component component-id="template0008" component-type="Style Types" major-version="8" minor-version="1"/>
+ <epideploy:detail>
+  <style-info apply-template-header="false" description="SBG CIB Header" friendly-id="sbgCIBHeader" id="bTVWSdbfTWWdbQaVYTeTXTUVcXfYRZaQ" is-system="false" primary-filename="sbgCIBHeader.jsp" processing-type="JSP_BASED" secure="false" template-default="false" template-uid="template0008" title="SBG CIB Header" visible="true"/>
+ </epideploy:detail>
+</epideploy:component>

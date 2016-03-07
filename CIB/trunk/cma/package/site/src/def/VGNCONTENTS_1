@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "http://localhost:7021/wfmc/xpdl/0.03a/xpdl.dtd">
+<Package Id="1" Name="" xmlns:xpdl="http://www.wfmc.org/standards/docs/xpdl">
+<PackageHeader>
+<XPDLVersion>0.03a</XPDLVersion>
+<Vendor>Vignette V7 Process Workflow Modeler</Vendor>
+<Created>Thursday, August 28, 2003</Created>
+</PackageHeader><RedefinableHeader>
+<Author>system</Author>
+<Version/>
+<Codepage/>
+<Countrykey/>
+<Responsibles/>
+</RedefinableHeader><ConformanceClass GraphConformance="LOOP_BLOCKED"/><ExternalPackages/><TypeDeclarations/><WorkflowProcesses>
+<WorkflowProcess Id="1" Name="vgnWfDeployToAllStages">
+<ProcessHeader>
+<Created>Thursday, August 28, 2003</Created>
+<Description>Performs the deployment to all associated stages.</Description>
+<Priority></Priority>
+<ValidFrom></ValidFrom>
+<ValidTo></ValidTo>
+</ProcessHeader><FormalParameters>
+<FormalParameter Index="1" Id="1.1" Mode="IN">  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>
+  <Description>
+    The ID of the current payload
+  </Description>
+</FormalParameter>
+<FormalParameter Index="2" Id="1.2" Mode="IN">  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>
+  <Description>
+    The jobId for this deployment.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="3" Id="1.3" Mode="IN">  <DataType>
+      <PlainType Type="BOOLEAN"/>
+  </DataType>
+  <Description>
+    
+  </Description>
+</FormalParameter>
+<FormalParameter Index="4" Id="1.4" Mode="OUT">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>
+  <Description>
+    The result of the CompleteDeployment activity.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="5" Id="1.5" Mode="OUT">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>
+  <Description>
+    The result of the CancelDeployment activity.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="6" Id="1.6" Mode="OUT">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>
+  <Description>
+    The result from the last execution of the BeginDeployment activity.
+  </Description>
+</FormalParameter>
+</FormalParameters>
+<DataFields>
+  <DataField Id="df0" Name="BeginDeploy.result">
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <Description>
+      Null indicates success, non-null describes failure.
+    </Description>
+    <ExtendedAttributes>
+
+    </ExtendedAttributes>
+  </DataField>
+  <DataField Id="df1" Name="CompleteDeployment.result">
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <Description>
+      Null indicates success, non-null describes failure.
+    </Description>
+    <ExtendedAttributes>
+
+    </ExtendedAttributes>
+  </DataField>
+  <DataField Id="df2" Name="CancelDeployment.result">
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <Description>
+      Null indicates success, non-null describes failure.
+    </Description>
+    <ExtendedAttributes>
+
+    </ExtendedAttributes>
+  </DataField>
+</DataFields><Participants>
+</Participants><Applications>
+<Application Id="6" Name="executeDeploymentJob">
+<FormalParameters>
+<FormalParameter Index="1" Id="6.1" Mode="IN">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    The String Id of the payload of the workflow process running the Job.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="2" Id="6.2" Mode="IN">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    The String Id of the Job.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="3" Id="6.3" Mode="IN">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    The name of the stage to which the Job should be deployed.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="4" Id="6.4" Mode="OUT">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    Null indicates success, non-null describes failure.
+  </Description>
+</FormalParameter>
+</FormalParameters>
+<ExtendedAttributes>
+<ExtendedAttribute Name="6.1" Value="vgnPayloadId"/>
+<ExtendedAttribute Name="6.2" Value="jobId"/>
+<ExtendedAttribute Name="6.3" Value="stage"/>
+  <ExtendedAttribute Name="6.4" Value="result"/>
+</ExtendedAttributes>
+</Application>
+<Application Id="15" Name="completeDeploymentJob">
+<FormalParameters>
+<FormalParameter Index="1" Id="15.1" Mode="IN">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    The String Id of the payload of the workflow process running the Job.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="2" Id="15.2" Mode="IN">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    The String Id of the Job.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="3" Id="15.3" Mode="OUT">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    Null indicates success, non-null describes failure.
+  </Description>
+</FormalParameter>
+</FormalParameters>
+<ExtendedAttributes>
+<ExtendedAttribute Name="15.1" Value="vgnPayloadId"/>
+<ExtendedAttribute Name="15.2" Value="jobId"/>
+  <ExtendedAttribute Name="15.3" Value="result"/>
+</ExtendedAttributes>
+</Application>
+<Application Id="33" Name="cancelDeploymentJob">
+<FormalParameters>
+<FormalParameter Index="1" Id="33.1" Mode="IN">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    The String Id of the payload of the workflow process running the Job.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="2" Id="33.2" Mode="IN">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    The String Id of the Job.
+  </Description>
+</FormalParameter>
+<FormalParameter Index="3" Id="33.3" Mode="OUT">
+  <DataType>
+      <BasicType Type="STRING"/>
+  </DataType>  <Description>
+    Null indicates success, non-null describes failure.
+  </Description>
+</FormalParameter>
+</FormalParameters>
+<ExtendedAttributes>
+<ExtendedAttribute Name="33.1" Value="vgnPayloadId"/>
+<ExtendedAttribute Name="33.2" Value="jobId"/>
+  <ExtendedAttribute Name="33.3" Value="result"/>
+</ExtendedAttributes>
+</Application>
+</Applications><Activities>
+<Activity Id="_RouteStartShape1" Name= "">
+  <Description></Description>
+  <Route/>
+  <TransitionRestrictions>
+    <TransitionRestriction>
+      <Join Type="AND"/>
+    </TransitionRestriction>
+    <TransitionRestriction>
+      <Split Type="AND"/>
+    </TransitionRestriction>
+  </TransitionRestrictions>
+</Activity>
+<Activity Id="6" Name= "BeginDeploy">
+<Description></Description>
+<Implementation>
+<Tool Id="6" Type="APPLICATION"></Tool></Implementation><ExtendedAttributes>
+<ExtendedAttribute Name="X" Value="2.0105 in."></ExtendedAttribute>
+<ExtendedAttribute Name="Y" Value="7.3734 in."></ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="IN">
+  <ExtendedAttribute Name="VgnInputName" Value="vgnPayloadId">
+    <ExtendedAttribute Name="VgnInputMapping" Value="FormalParameter">1.1</ExtendedAttribute>
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <InitialValue></InitialValue>
+    <Description>The String Id of the payload of the workflow process running the Job.</Description>
+  </ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="IN">
+  <ExtendedAttribute Name="VgnInputName" Value="jobId">
+    <ExtendedAttribute Name="VgnInputMapping" Value="FormalParameter">1.2</ExtendedAttribute>
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <InitialValue>&quot;&quot;</InitialValue>
+    <Description>The String Id of the Job.</Description>
+  </ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="IN">
+  <ExtendedAttribute Name="VgnInputName" Value="stage">
+    <ExtendedAttribute Name="VgnInputMapping" Value="Literal">""</ExtendedAttribute>
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <InitialValue>&quot;&quot;</InitialValue>
+    <Description>The name of the stage to which the Job should be deployed.</Description>
+  </ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="OUT">
+     <ExtendedAttribute Name="df0" Value="DataField">df0</ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="OUT">
+     <ExtendedAttribute Name="df0" Value="FormalParameter">1.6</ExtendedAttribute>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity><Activity Id="15" Name= "CompleteDeployment">
+<Description></Description>
+<Implementation>
+<Tool Id="15" Type="APPLICATION"></Tool></Implementation><ExtendedAttributes>
+<ExtendedAttribute Name="X" Value="6.8255 in."></ExtendedAttribute>
+<ExtendedAttribute Name="Y" Value="7.3734 in."></ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="IN">
+  <ExtendedAttribute Name="VgnInputName" Value="vgnPayloadId">
+    <ExtendedAttribute Name="VgnInputMapping" Value="FormalParameter">1.1</ExtendedAttribute>
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <InitialValue></InitialValue>
+    <Description>The String Id of the payload of the workflow process running the Job.</Description>
+  </ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="IN">
+  <ExtendedAttribute Name="VgnInputName" Value="jobId">
+    <ExtendedAttribute Name="VgnInputMapping" Value="FormalParameter">1.2</ExtendedAttribute>
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <InitialValue>&quot;&quot;</InitialValue>
+    <Description>The String Id of the Job.</Description>
+  </ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="OUT">
+     <ExtendedAttribute Name="df1" Value="DataField">df1</ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="OUT">
+     <ExtendedAttribute Name="df1" Value="FormalParameter">1.4</ExtendedAttribute>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity><Activity Id="24" Name= "">
+<Description></Description>
+<Route/><TransitionRestrictions>
+<TransitionRestriction><Split Type="XOR"><TransitionRefs><TransitionRef Id="46"/><TransitionRef Id="45"/><TransitionRef Id="44"/></TransitionRefs></Split></TransitionRestriction>
+</TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="X" Value="4.0676 in."></ExtendedAttribute>
+<ExtendedAttribute Name="Y" Value="7.3734 in."></ExtendedAttribute>
+<ExtendedAttribute Name="RouteType" Value="SPLIT"></ExtendedAttribute>
+</ExtendedAttributes>
+</Activity><Activity Id="33" Name= "CancelDeployment">
+<Description></Description>
+<Implementation>
+<Tool Id="33" Type="APPLICATION"></Tool></Implementation><ExtendedAttributes>
+<ExtendedAttribute Name="X" Value="4.0755 in."></ExtendedAttribute>
+<ExtendedAttribute Name="Y" Value="6.0459 in."></ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="IN">
+  <ExtendedAttribute Name="VgnInputName" Value="vgnPayloadId">
+    <ExtendedAttribute Name="VgnInputMapping" Value="FormalParameter">1.1</ExtendedAttribute>
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <InitialValue></InitialValue>
+    <Description>The String Id of the payload of the workflow process running the Job.</Description>
+  </ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="IN">
+  <ExtendedAttribute Name="VgnInputName" Value="jobId">
+    <ExtendedAttribute Name="VgnInputMapping" Value="FormalParameter">1.2</ExtendedAttribute>
+    <DataType>
+      <BasicType Type="STRING"/>
+    </DataType>
+    <InitialValue>&quot;&quot;</InitialValue>
+    <Description>The String Id of the Job.</Description>
+  </ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="OUT">
+     <ExtendedAttribute Name="df2" Value="DataField">df2</ExtendedAttribute>
+</ExtendedAttribute>
+<ExtendedAttribute Name="VgnActParam" Value="OUT">
+     <ExtendedAttribute Name="df2" Value="FormalParameter">1.5</ExtendedAttribute>
+</ExtendedAttribute>
+</ExtendedAttributes>
+</Activity></Activities>
+<Transitions>
+<Transition Id="42" From="_RouteStartShape1" To="6" Loop="NOLOOP" Name="">
+<Condition Type="CONDITION"><Xpression></Xpression></Condition>
+<Description></Description>
+<ExtendedAttributes><ExtendedAttribute Name="BeginCell" Value="Connections.X1"/>
+<ExtendedAttribute Name="EndCell" Value="PinX"/>
+</ExtendedAttributes></Transition><Transition Id="43" From="6" To="24" Loop="NOLOOP" Name="">
+<Condition Type="CONDITION"><Xpression></Xpression></Condition>
+<Description></Description>
+<ExtendedAttributes><ExtendedAttribute Name="BeginCell" Value="Connections.X8"/>
+<ExtendedAttribute Name="EndCell" Value="Connections.X4"/>
+</ExtendedAttributes></Transition><Transition Id="44" From="24" To="33" Loop="NOLOOP" Name="">
+<Condition Type="CONDITION"><Xpression><ExtendedAttributes>
+	<ExtendedAttribute Name="operator" Value="neq">
+		<ExtendedAttribute Name="operand" Value="STRING">BeginDeploy.result</ExtendedAttribute>
+		<ExtendedAttribute Name="operand" Value="STRING">"NoMoreStages"</ExtendedAttribute>
+	</ExtendedAttribute>
+</ExtendedAttributes></Xpression></Condition>
+<Description></Description>
+<ExtendedAttributes><ExtendedAttribute Name="BeginCell" Value="Connections.X2"/>
+<ExtendedAttribute Name="EndCell" Value="Connections.X6"/>
+</ExtendedAttributes></Transition><Transition Id="45" From="24" To="15" Loop="NOLOOP" Name="">
+<Condition Type="CONDITION"><Xpression><ExtendedAttributes>
+	<ExtendedAttribute Name="operator" Value="eq">
+		<ExtendedAttribute Name="operand" Value="STRING">BeginDeploy.result</ExtendedAttribute>
+		<ExtendedAttribute Name="operand" Value="STRING">"NoMoreStages"</ExtendedAttribute>
+	</ExtendedAttribute>
+</ExtendedAttributes></Xpression></Condition>
+<Description></Description>
+<ExtendedAttributes><ExtendedAttribute Name="BeginCell" Value="Connections.X3"/>
+<ExtendedAttribute Name="EndCell" Value="Connections.X7"/>
+</ExtendedAttributes></Transition><Transition Id="46" From="24" To="6" Loop="NOLOOP" Name="Do Next Stage">
+<Condition Type="CONDITION"><Xpression><ExtendedAttributes>
+	<ExtendedAttribute Name="operator" Value="eq">
+		<ExtendedAttribute Name="operand" Value="STRING">BeginDeploy.result</ExtendedAttribute>
+		<ExtendedAttribute Name="operand" Value="STRING">""</ExtendedAttribute>
+	</ExtendedAttribute>
+</ExtendedAttributes></Xpression></Condition>
+<Description></Description>
+<ExtendedAttributes><ExtendedAttribute Name="BeginCell" Value="Connections.X1"/>
+<ExtendedAttribute Name="EndCell" Value="Connections.X6"/>
+</ExtendedAttributes></Transition></Transitions>
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="X" Value="0.6979 in."></ExtendedAttribute>
+    <ExtendedAttribute Name="Y" Value="7.3754 in."></ExtendedAttribute>
+    <ExtendedAttribute Name="1.1">
+      <ExtendedAttribute Name="FormalParameterName" Value="vgnPayloadId"/>
+    </ExtendedAttribute>
+    <ExtendedAttribute Name="1.2">
+      <ExtendedAttribute Name="FormalParameterName" Value="jobId"/>
+      <InitialValue>""</InitialValue>
+    </ExtendedAttribute>
+    <ExtendedAttribute Name="1.3">
+      <ExtendedAttribute Name="FormalParameterName" Value="isExpedite"/>
+      <InitialValue>FALSE</InitialValue>
+    </ExtendedAttribute>
+    <ExtendedAttribute Name="1.4">
+      <ExtendedAttribute Name="FormalParameterName" Value="CompletionResult"/>
+      <InitialValue>""</InitialValue>
+    </ExtendedAttribute>
+    <ExtendedAttribute Name="1.5">
+      <ExtendedAttribute Name="FormalParameterName" Value="CancelResult"/>
+      <InitialValue>""</InitialValue>
+    </ExtendedAttribute>
+    <ExtendedAttribute Name="1.6">
+      <ExtendedAttribute Name="FormalParameterName" Value="DeployResult"/>
+      <InitialValue>""</InitialValue>
+    </ExtendedAttribute>
+  </ExtendedAttributes></WorkflowProcess></WorkflowProcesses>
+<ExtendedAttributes>
+    <ExtendedAttribute Name="VgnXPDLVersion" Value="7.0.2"/>
+</ExtendedAttributes>
+</Package>

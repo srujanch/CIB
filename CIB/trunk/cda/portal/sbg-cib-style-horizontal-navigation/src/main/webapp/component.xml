@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<epideploy:component build-version="Gold" component-id="aVfVRVRfRXRTZQaVYTeTXTUVcXfYRZaQ" component-type="Styles" description="SBG CIB Horizontal Navigation" epi-build="688968" epi-version="8.1" major-version="1" minor-version="0" title="SBG CIB Horizontal Navigation" xmlns:epideploy="http://www.epicentric.com/deployment">
+ <epideploy:required-component component-id="template0002" component-type="Style Types" major-version="8" minor-version="1"/>
+ <epideploy:detail>
+  <style-info apply-template-header="false" description="SBG CIB Horizontal Navigation" friendly-id="sbgCIBHorizontalNav" id="aVfVRVRfRXRTZQaVYTeTXTUVcXfYRZaQ" is-system="false" primary-filename="sbgCIBHorizontalNav.jsp" processing-type="JSP_BASED" secure="false" template-default="false" template-uid="template0002" title="SBG CIB Horizontal Navigation" visible="true"/>
+ </epideploy:detail>
+</epideploy:component>

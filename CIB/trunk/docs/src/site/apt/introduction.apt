@@ -1,0 +1,15 @@
+Introduction
+
+  This document provides important information for release managers of the 
+  SBSA Youth Portal site. It summarises the steps required to build, install, 
+  and release the application to a target environment. The document is broken 
+  into the following sections:
+  
+  [[1]] Build - lists the steps required to build the SBSA application using
+  maven
+  
+  [[2]] Install - lists the steps required to install the SBSA application on 
+  a fresh environment.
+  
+  [[3]] Release - lists the steps required to release new versions of the SBSA 
+  application to an existing environment.

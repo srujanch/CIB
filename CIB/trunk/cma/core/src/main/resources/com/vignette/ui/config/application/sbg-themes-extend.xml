@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	When creating this file, it must follow this naming pattern:
+		*themes*.xml
+	
+	A prefix and/or suffix can be provided to control the order of loading. For example, the following
+	files will load in top down order based on the names:
+		aardvark-themes.xml
+		badger-themes.xml
+		badger-themes-modified.xml
+		themes-modified.xml
+		
+	NOTE: If there are any naming collisions, the last file that is loaded will win. 
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://ui.vignette.com/schema/core"
+       xsi:schemaLocation="
+       		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       		http://ui.vignette.com/schema/core http://ui.vignette.com/schema/core/core.xsd"
+       default-lazy-init="false">
+
+	<!-- Theme attributes
+		extend: the identifier of the theme to extend
+		merge-css: if true, the CSS in this theme will be merged with the theme being extended
+			if false, the CSS in this theme will be used in place of the theme being extended
+		merge-javascript: if true, the JavaScript in this theme will be merged with the theme being extended
+			if false, the JavaScript in this theme will be used in place of the theme being extended
+ 	-->
+	<c:theme extend="corporate" merge-css="true" merge-javascript="true" merge-template="true">
+		<c:javascript key="*">
+			<!-- The Util js for SBG-->
+			<c:resource path="/sbg-ui-extensions/common/js/sbgUtil.js"/>
+		</c:javascript>
+
+		<!-- Custom render jsp for Content Instance Editor. 
+			This has been implemented to dynamically show the widgets (Link to channel/CI/external URL) 
+			based on user selection.
+		
+			vui-editor:ContentInstance is the key defined for Content Instance editor in OOTB default-ui-themes.xml. 
+			Take this as base(parent) for custom CI editor.
+		-->
+		<c:template key="vui-editor:ContentInstance:SBG-BANNER" path="/sbg-ui-extensions/editor/sbgEditor.jsp">
+			<c:region-template key="region-parent" template="vui-editor:ContentInstance"/>
+		</c:template>
+
+		<c:template key="vui-editor:ContentInstance:SBG-TEASER" path="/sbg-ui-extensions/editor/sbgEditor.jsp">
+			<c:region-template key="region-parent" template="vui-editor:ContentInstance"/>
+		</c:template>
+
+		<!-- Custom render jsp for Content Instance Relator Editor. 
+			This has been implemented to dynamically show the widgets (Link to channel/CI/external URL) 
+			based on user selection.
+
+			vui-editor:Relation is the key defined for Content Instance Relator editor in OOTB default-ui-themes.xml. 
+			Take this as base(parent) for custom CI Relator editor.
+		-->
+		<c:template key="vui-editor:Relation:SBG-CONTENT-LIST" path="/sbg-ui-extensions/editor/sbgRelatorEditor4Radio.jsp">
+			<c:region-template key="region-parent" template="vui-editor:Relation"/>
+		</c:template>
+
+		<!-- Custom render jsp for Content Instance Relator Editor. 
+			This has been implemented to dynamically show the widgets
+			(Tab Decription/Tab Friendly Name/Channel related to Tab /External Url related to Tab)
+			based on user selection of Tab Type.
+
+			vui-editor:Relation is the key defined for Content Instance Relation editor in OOTB default-ui-themes.xml. 
+			Take this as base(parent) for custom CI Relator editor.
+		-->
+		<c:template key="vui-editor:Relation:SBG-GENERAL-PAGE" path="/sbg-ui-extensions/editor/sbgRelatorEditor4Dropdown.jsp">
+			<c:region-template key="region-parent" template="vui-editor:Relation"/>
+		</c:template>
+
+		<c:template key="vui-editor:Relation:SBG-PRODUCT" path="/sbg-ui-extensions/editor/sbgRelatorEditor4Dropdown.jsp">
+			<c:region-template key="region-parent" template="vui-editor:Relation"/>
+		</c:template>
+
+		<c:template key="vui-editor:Relation:SBG-SECTOR" path="/sbg-ui-extensions/editor/sbgRelatorEditor4Dropdown.jsp">
+			<c:region-template key="region-parent" template="vui-editor:Relation"/>
+		</c:template>
+
+		<!-- Widget Overrides -->
+		<!-- 
+			Custom renderer jsp for Simple Select Widget.(Radio CCE widget). OOTB, the options of radio CCE widget are shown vertically.
+			With this custom renderer, the radio button options will be shown horizontally.
+		-->
+		<c:template key="vcm-widget-simpleselect:ContentInstance:SBG-BANNER:LINK-TO" path="/sbg-ui-extensions/common/widget/sbgSimpleselect.jsp"/>
+
+		<c:template key="vcm-widget-simpleselect:ContentInstance:SBG-TEASER:LINK-TO" path="/sbg-ui-extensions/common/widget/sbgSimpleselect.jsp"/>
+
+		<c:template key="vcm-widget-simpleselect:Relation:SBG_RELATED_LINKS:LINK-TO" path="/sbg-ui-extensions/common/widget/sbgSimpleselect.jsp"/>
+	</c:theme>
+</beans>

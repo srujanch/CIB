@@ -1,0 +1,406 @@
+Install
+
+  The steps below assume that all thirdparty software and Vignette products have
+  been correctly installed. Additional environment configuration prerequisites 
+  necessary for the custom SBSA site(s) are listed below.
+
+* Content Management Application (CMA)
+
+** Prerequisites
+
+
+	[[1]]Vignette Content 8.0 Cumulative Patch released on August 17 has been applied as per the release notes. This patch primary required as a fix to JQuery issue.
+	
+	[[2]]Vignette Rich Media Management 8.0 Service Pack 1 released on August 18 has been applied as per the release notes. 
+	This patch addresses defects identified and fixed since the 8.0 release of the Vignette Rich Media Management product and adds compatability 
+	with Vignette Content 8.0 SP1.
+	
+	[[3]]Patch for VCA 8.0 has been applied as per steps detailed in the JIRA which fixes issue regarding Comments Portlet not retaining vgnextoid, 
+	and vgnextchannel ids in the request after posting comments. http://jira.vignette.com/browse/COLLAB-10430
+	
+		Steps to apply this fix:
+		
+		[[a]] Login to portal console as admin.
+		
+		[[b]] From the left navigation, Tools -> PortalBean Manager
+		
+		[[c]] Click on Import Components.
+		
+		[[d]] Import the attached vca-templating-code.car.
+		
+		[[e]] Restart portal twice.
+		
+	[[4]]Deploy the Appsvcs-extension 8.0
+	
+	[[5]]Patch the Appsvcs-extension 8.0.1
+	
+	[[6]]Update the vign-elj-config.xml file under appsvcs-extensions.ear/vgn-ext-links.war to outputXHTML=true 
+
+
+** Steps
+
+  [[1]] Copy sbsa-yp-cma-dist-*-bin.tar.gz assembly to stage directory (eg /opt/installers/sbyp_custom/cma) and 
+  untar with following command:
+
+------
+tar xzf sbsa-yp-cma-dist-*-bin.tar.gz
+------
+
+  [[2]] Using configp or cfgaction, deploy extension jar sbsa-yp-cma-core.jar
+  
+  [[3]] Copy sbsa-yp-cma-core.jar to the VCM lib folders on all stages (vcm/Content/8_0/lib on preview, or cds/Content/8_0/lib on delivery)
+
+  [[4]] Register the za.co.standardbank.youthportal.cma.listener.MediaListener in the PrePersistance create event of the mgmt stage
+
+  [[5]] Remove the community listener from all events - this is unnecessary in the SB environment and causes issues, as there is only a single
+        Collaboration server.
+
+  [[6]] Don't forget to restart the config agent and DA.
+  
+  [[7]] Copy the sbsa-yp-cma-ui.war to VgnContentSvcs.ear (found under <VCM_INSTALL_DIR>/Content/8_0/deployedApps)
+
+  [[8]] Modify the application.xml found in VgnContentSvcs.ear/META-INF to add a web module for the above war. 
+	This is a one time modification for all environments while deploying the cma code for the first time.
+
+------		
+<module>
+	<web>
+		<web-uri>sbsa-yp-cma-ui.war</web-uri>
+		<context-root>sbsa-yp-cma-ui</context-root>
+	</web>
+</module>
+------
+
+  [[9]] Update(redeploy) the VgnContentSvcs.ear from the runtime services console
+	Request the Update from under top level Deployments node - the ear also appears beneath the Managed Server node, but cannot be updated from here
+  
+  [[10]] Create CTD database schema by executing ./sql/create-SBYP-Tables.sql in the VCM databases (management and delivery).
+	Note that inline link table will probably already exist & cause an error - this is OK.
+	
+  [[11]] Check whether Article and Product Sample CTDs exist - if so, rename these (Article_X and Product_X) and republish any instances. Failure to do this may result in severe publishing issues dur to name clash with SBSA CTDs.
+  Export CTDs from existing environment (Dev or UAT) without references and use vgnimport to import these - ctd_wr.zip will be the correct package name if using exoprt_full.sh for exports.
+  Similarly export/import site structures (with no content).
+  Associate all CTDs with the youth and youthmobile site if necessary
+  Note that sample Article and Product CTs may exist - rename these to prevent constraint errors when importing
+  Export/Import remaining content.
+
+  
+  [[12]] Configure EPhox Inline Link widget: In the configconsole, add the Rich
+  Media Services CTD "DSX-MEDIA-IMAGE.SOURCEPATH" to the list of known static
+  file wrappers. This is done by modifying the inlinetag.wrapperTypes property 
+  in the /vcm-vgninst/cdsvcs/stage-mgmt/resources/Generic/VgnExtLink/Generic
+  DATA setting. For example:
+  
+------
+# CT that are static file wrappers: CTname.FileAttribute
+inlinetag.wrapperTypes=ImageWrapper.ImagePath,FileWrapper.File,DSX-MEDIA-IMAGE.SOURCEPATH
+------
+
+  Be sure to also add the DSX-MEDIA-IMAGE CTD in the list of available content
+  types in the "Image Definition Form" Content Type widget definition, such that
+  instances of this type appear when searching for images from ePhox.   
+  This is located in the Image Definition Form CT, under 
+	/Workbench/Content Type Definitions/VgnExtConsole
+  - update the Content Select CCE widget for the Image Wrapper widget.
+
+  [[13]] Projects – 
+	All 4 top level project without content. 
+	Export the Reference Data Content Items which are under Admin -> Reference Data project folder
+
+  [[14]]	Workflows 
+
+------
+  Export the /Workbench/Workflow Definitions/SBYP Workflows project
+------
+
+  [[15]]	Roles and Capabilities - Database export/import
+  Five custom roles has been created.
+
+------
+	YP_ContentAdministrator
+	YP_ContentContributor  
+	YP_SubContentContributor  	
+	YP_ContentModerator    
+	YP_SystemAdministrator   
+------
+
+
+	Obtain SQL to create the Roles and assign Capabilities from svn
+------	
+	yp_roles.sql
+	yp_role_cababilities.sql
+------	
+	Load these into the vcm database schema.
+	
+	
+	If Roles have been updated, export new sql from a dababase using the following command to select and view the roles.
+
+------
+	SELECT VGNROLES.ROLENAME, VGNROLES.DESCRIPTION FROM VGNROLES WHERE VGNROLES.ROLENAME like 'YP_%'
+------
+
+	Use the following command to insert into other databases.
+
+------
+	INSERT INTO VGNROLES(ROLENAME, DESCRIPTION) VALUES('my ROLENAME value','my DESCRIPTION value'); 
+------
+
+	Use the following command to select and view the roles and capabilities associations.
+
+------
+	select VGNROLECAPABILITYASSOC.ROLENAME, VGNROLECAPABILITYASSOC.APP, VGNROLECAPABILITYASSOC.CAPABILITY, VGNROLECAPABILITYASSOC.GRANTED
+	from VGNROLECAPABILITYASSOC
+	where VGNROLECAPABILITYASSOC.ROLENAME like 'YP_%' 
+------
+
+	Making insert statement using the results of the select statement:
+
+------
+	INSERT INTO VGNROLECAPABILITYASSOC(ROLENAME, APP, CAPABILITY, GRANTED) VALUES('My ROLENAME value','my APP value','my CAPABILITY value','my GRANTED value'); 
+------
+
+
+* Content Delivery Application (CDA)
+  
+** Prerequisites
+
+  [[1]] Ensure that static files are being served correctly. This involves 
+  configuring an appropriate web and/or app server, along with configuration of 
+  a URL Path Prefix and Docroot resource in the VCM configuration console - 
+  for both mgmt and delivery stages (note: URLPathPrefix name must be "static_file"
+  for both mgmt and delivery stage - DPM configures by default for mgmt stage)
+  
+  [[2]] Ensure that VgnExtTemplating resource is configured correctly for stage.
+  It is not possible to provide definitive settings for this resource in this 
+  document, as settings for each environment may differ. Sample settings for 
+  both mgmt and delivery stage are packaged along with the final assembly 
+  (under /config folder), and may be modified in the code structure at the 
+  following locations:
+  
+------
+/cda/dist/src/config/VgnExtTemplating-mgmt.txt
+/cda/dist/src/config/VgnExtTemplating-delivery.txt
+------ 
+
+  For MANAGEMENT, values to change are:
+
+------
+  furl.cache.enabled=true
+  cluster.nodes=http\://<vap-node>\:8080/vgn-ext-templating,http\://<vap-node>\:8080/youth,http\://<vap-node>\:8080/youthmobile	
+  furl.enabled.sites=youth,youthmobile
+------
+
+  For MANAGEMENT, values to add are as follows (replace <vap-node> with node host name, eg uat-vcm1)
+  
+------
+
+  link.printer.impl=com.vignette.ext.furl.link.FriendlyURLLinkPrinter
+  request.context.modifier=za.co.standardbank.youthportal.cda.templating.link.SBSARequestContextModifier
+  formats.registered.formats=ajax,alternate
+------
+
+  
+  For DELIVERY, values to change are:
+  
+------
+  furl.enabled.sites=youth,youthmobile
+------  
+
+  For DELIVERY, values to add are as follows (replace <vap-node> with node host name, eg uat-del1)
+  
+------
+  furl.exclude.sitename=false
+  link.printer.impl=com.vignette.ext.furl.link.FriendlyURLLinkPrinter
+  request.context.modifier=za.co.standardbank.youthportal.cda.templating.link.SBSARequestContextModifier
+  formats.registered.formats=ajax,alternate
+  cluster.nodes=http\://<vap-node>\:8080/vgn-ext-templating,http\://<vap-node>\:8080/youth,http\://<vap-node>\:8080/youthmobile
+------
+  
+  [[3]] Two special configuration settings are required for Tomcat:
+  
+    [[a]] Because the portal applications work with multiple contexts (/portal,
+  /youth, /youthmobile, etc), must ensure that emptySessionPath="true" is 
+  included in the tomcat server.xml connector configuration. 
+  
+    [[b]] To allow for UTF-8 encoding, the setting URIEncoding="UTF-8" must be
+    added to the tomcat server.xml connector configuration.
+    
+  For example:
+
+------
+<Connector port="8080" protocol="HTTP/1.1" maxThreads="150" minSpareThreads="25"
+	maxSpareThreads="75" enableLookups="false" redirectPort="8443"
+	acceptCount="100" connectionTimeout="20000" disableUploadTimeout="true"
+	emptySessionPath="true" URIEncoding="UTF-8"/>
+------
+
+     [[c]] Add the following context entries after the existing entry for vgn-ext-templating:
+     
+------
+    <Context crossContext="true" debug="0" docBase="vgn-furl" path="/youth" />
+    <Context crossContext="true" debug="0" docBase="vgn-furl" path="/youthmobile" />
+    <Context crossContext="true" debug="0" docBase="vgn-furl" path="/youthportal" />
+    <Context crossContext="true" debug="0" docBase="vgn-furl" path="/youthsocial" />
+    <Context crossContext="true" debug="0" docBase="/opt/vignette/vcm_working/inst-vgninst/dagent_docroot/" path="/ypstaticfiles" />
+    <Context crossContext="true" debug="0" docBase="/opt/vignette/vcm_working/inst-vgninst/dagent_docroot" path="/file_source" />
+------
+  
+  
+  [[4]] Ensure that the vgncommsvcs.properties file is available to the
+  application. The file can be set via a Java system property vgnCommSvcsConfig 
+  pointing to a location in the file system. For example, in the setvapenv.sh
+  file, the following line could be added
+  
+  CATALINA_OPTS=$CATALINA_OPTS' -DvgnCommSvcsConfig='$VCS_COMMSVCSPROPS_FILE
+  
+  where VCS_COMMSVCSPROPS_FILE is the absolute path to the vgncommsvcs.properties file.
+  
+  [[5]] Configure Portal to integrate with OpenLDAP in read/write mode 
+  (as per Portal Configuration Guide). Use schema_extensions.schema in the
+  <portal-install-guide>/config/examples/usermanagement/ldap/openldap directory.
+  
+  [[6]] Configure the 404 page in webserver/tomcat to point to /youth/Error-404 URL as follows.
+     In the vgn-furl webapp, modify the error-page entry in WEB-INF/web.xml
+
+------	 
+  <error-page>
+     <error-code>404</error-code>
+     <location>/sbsa/sbsaYPError404.jsp</location>
+  </error-page>
+------
+
+     Create folder sbsa beneath the vgn-furl web app and copy sbsaYPError404.jsp from the release vgn-furl directory
+	 to the new folder
+	    /opt/tomcat/portal/webapps/vgn-furl/sbsa
+     (NB - this is not the same as the error 404 jsp in /opt/tomcat/portal/webapps/vgn-ext-templating/WEB-INF/jsp/sbsa/web/view/)
+  
+  [[7]] Verify admin user settings
+  Login to Collaboration as admin user, and display they user's attributes. If necessary set a valid email address for the user and add new attribute "wizard", set to "true" and hidden.
+  Verify that admin user is available in Portal, and set as a Server Administrator
+		
+** Steps
+
+  [[1]] For both mgmt and delivery stages, create following directory structure:
+  
+------
+<cda stage install dir - eg. /apps/sbsa/>
+          |- config
+          |- logs
+------
+
+  [[2]] For both mgmt and delivery stage tomcats, add following startup 
+  parameters in <tomcat install dir>/bin/setvapenv.sh
+  
+------
+-Dza.co.standardbank.youthportal.cda.installdir.path=/path/to/cda/install/dir
+-Dza.co.standardbank.youthportal.cda.log.level=<LOG_LEVEL_FOR_ENV - eg. DEBUG, WARN, ERROR>
+------
+	 
+  [[3]] Copy sbsa-yp-cda-dist assembly to stage directory and untar with 
+  following command:
+
+------
+tar xzf sbsa-yp-cda-dist-1.0.*-bin.tar.gz
+------
+
+  [[4]] Configure User Management for SBSA:
+    
+    [[a]] ISSUE (refer VOLSS ticket 240443). The default portalInetOrgPerson
+      schema in the schema_extensions.schema contains an attribute "portalUID".
+      This attribute is no longer required by portal but it appears as a MUST
+      attribute in the portalInetOrgPerson objectclass. Manually move this portalUID
+      attribute from the MUST to the MAY section and then restart openldap.
+      
+    [[b]] Copy the sbsainetorgperson.schema file to the /etc/openldap/schema 
+      folder.
+    
+    [[c]] Add the sbsainetorgperson.schema file as an include file in the
+      slapd.conf file
+      
+    [[d]] Restart OpenLDAP
+      
+    [[e]] Copy the entity_management.xml and entity_datasource.xml files from
+    the ./config folder to the <portal install dir>/config folder (NOTE: Take
+    a backup of existing files first!)
+      
+    [[f]] If necessary, recreate the vgnadmin user as a sbsaInetOrgPerson object
+    using the "create_first_admin_account.sh" script.
+                
+    [[g]] Ensure that there is a group called "Youth Users" in Portal/LDAP
+        
+    [[]]
+    
+  [[4]] Create portal database schema by executing ./sql/create-portal-*.sql in 
+  the portal database.
+  
+  [[5]] Copy ./config/cda.properties to cda stage install dir - eg. /opt/sbsa/conf. 
+  Be sure to update this file with the correct values for the target environment 
+
+------
+
+	cda.seo.meta.og.site.name=<host_name>  
+	tracking.mobile.link.base=http://<host_name>:8080
+
+------
+
+  Copy the following to the same location:
+		* countriesConfiguration.xml
+		* sbsaValidationRules.properties
+
+  [[6]] Stop tomcat
+
+  [[7]] Delete vgn-ext-templating, vgn-community-services, vgn-community-applications
+  portlet-contact-me if they exist already.
+  
+  [[8]] Copy ./wars/* to <tomcat install dir>/webapps
+  
+  [[9]] For the following files, check existing configuration values and merge or replace as appropriate from the release config directory. Backup files before updating.
+      Copy the following to the vcs portal component configuration directory (/opt/vignette/vcs/portal/conf/)
+	  * customerConfig.xml
+	  * vcacustomerConfig.xml
+	  * vcasharedApplicationConfig.xml
+	  
+	  Copy the following to the vcs java component configuration directory (/opt/vignette/vcs/java/conf/) if necessary, and update the collab host settings
+	  * vgncommsvcs.properties
+	 
+
+  [[10]] Copy the following to the tomcat Catalina localhost directory (/opt/tomcat/portal/conf/Catalina/localhost)
+  	  * vgn-community-services.xml
+  	  * vgn-community-applications.xml
+  	  * portlet-contact-me.xml
+	(vgn-ext-templating.xml should already be present, and vgn-tas.xml should be if this is a preview stage)
+		Update portlet-contact-me.xml to set correct database connection credentials - refer to portal config properties.txt if necessary
+	  
+  [[11]] Copy the following to the portal webapp lib directory (/opt/tomcat/portal/webapps/portal/WEB-INF/lib) from the release portal/lib directory
+  	  * xstream-1.3.1.jar
+
+  [[12]] Copy the following to the portal wabapp admin directory (/opt/tomcat/portal/webapps/portal/admin)  from the release portal/admin directory
+  	  * getUserProfileImage.jsp	  
+	  
+  [[13]] Increase the session-timeout value in the portal webapp web.xml file to 60 (minutes).
+  The entry should look as follows:
+  
+------
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
+------
+  
+  [[14]] Restart tomcat twice
+  
+  [[15]] Copy all component cars in ./cars/component to <portal install dir>/deployment/upload
+  Note: If deploying cars to a cluster, they only need to be deployed to a single node (however, both 
+  nodes must be restarted in sequence - refer portal documentation for more detalis if required)
+  
+  [[16]] Run the User Profile Wizard for each site (youth, youthmobile, youthsocial). You MUST be logged into Portal as the admin user.
+  	  * Step 1 - Share with existing network (default_site), select the Create New Profile option
+  	  * Step 2 - Leave values defaulted
+  	  * Step 3 - Clear the options for Email Vefification and Moderation of Profiles. Ensure the Profile Pictures option is set
+  	  * Step 4 - Select the Save as Template option and enter name SBYP_Profile
+  Note that the User Profile Wizard is only required once per site per environment. Running for the management stage creates appropriate Collaboration objects for the site, 
+  and these are shared by the Delivery stage.
+  For more information on settings, refer doc "Technical Design - SBSA Youth Portal User Management"
+
+  
+  [[17]] Restart tomcat once
+ 

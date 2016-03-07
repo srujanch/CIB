@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>SBSA GreenField CDA Templating Core</name>
+    <description>The core CDA templating jar file. It is packaged with vgn-ext-templating war, and contains all SBSA templating code/resources.</description>
+    <artifactId>sbsa-sbg-cda-templating-core</artifactId>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>za.co.standardbank</groupId>
+        <artifactId>sbsa-sbg-cda-templating</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vignette</groupId>
+            <artifactId>vgn-appsvcs-cda</artifactId>
+        </dependency>
+        <!-- <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-contentbeans</artifactId>
+        </dependency> -->
+        <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cda-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>za.co.standardbank</groupId>
+            <artifactId>sbsa-sbg-cma-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+         </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+        </dependency> 		
+    </dependencies>
+
+</project>

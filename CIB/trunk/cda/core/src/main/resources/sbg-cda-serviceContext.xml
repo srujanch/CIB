@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="cdaConfiguration" class="za.co.standardbank.sbg.cda.domain.impl.PropertiesConfigurationImpl">
+		<constructor-arg index="0">
+			<value>${sbg.cda.homedir}/config/sbgcda.properties</value>
+		</constructor-arg>
+	</bean>
+	<bean id="searchService" class="za.co.standardbank.sbg.cda.service.impl.SearchServiceImpl"></bean>
+</beans>

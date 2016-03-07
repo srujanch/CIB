@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.bea.com/ns/weblogic/90
+         http://www.bea.com/ns/weblogic/920/weblogic-web-app.xsd" >
+
+ 	<description>sbg cib Custom Content Manangement UI </description>
+	<security-role-assignment>
+		<role-name>VignetteUser</role-name>
+		<principal-name>everyone</principal-name>
+   	</security-role-assignment>
+
+	<session-descriptor>
+		<persistent-store-type>replicated_if_clustered</persistent-store-type>
+	</session-descriptor>	
+
+	<jsp-descriptor>
+		<keepgenerated>false</keepgenerated>
+		<page-check-seconds>-1</page-check-seconds>
+	</jsp-descriptor>
+
+	<container-descriptor>
+		<check-auth-on-forward/>
+		<servlet-reload-check-secs>-1</servlet-reload-check-secs>
+		<resource-reload-check-secs>-1</resource-reload-check-secs>
+	</container-descriptor>
+
+	<charset-params>
+		<input-charset>
+			  <resource-path>/*</resource-path>
+			  <java-charset-name>UTF8</java-charset-name>
+		</input-charset>
+	</charset-params>
+
+	<context-root>sbg-ui-extensions</context-root>
+</weblogic-web-app>

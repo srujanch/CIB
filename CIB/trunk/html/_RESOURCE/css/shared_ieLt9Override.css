@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* ie Override CSS Document */
+
+@media screen {
+
+/* TO ENABLE TESTING IF THIS STYLESHEET IS CALLED HEADERS CHANGE COLOR .headerSBG_CIB h1 a {color:green;}*/ 
+#dropMenu li:hover div a {background:#F4F4F4;filter:none;}
+.errorPages #products .portletItem{width:197px;}
+input[type="text"] {}
+input[type="text"] {border-color: #ABADB3 #ABADB3 #ABADB3 #ABADB3;border-radius: 3px 3px 3px 3px;border-style: solid;border-width: 1px;padding: 3px 8px;}
+select{padding:2px 0 2px 4px;border: 1px solid #ABADB3;border-radius: 3px 3px 3px 3px}
+.topNotification{height:40px;}
+.hpgVer3 #shareTicker .shareInfo #ticker{position:relative;}
+}

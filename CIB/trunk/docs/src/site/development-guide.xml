@@ -1,0 +1,16 @@
+<book>
+    <id>sbsa-yp-development-guide</id>
+    <title>SBSA Youth Portal Development Guide</title>
+    <author>John Egan</author>
+    <chapters>
+        <chapter>
+            <id>developer-guide</id>
+            <title>SBSA Youth Portal Developer Guide</title>
+            <sections>
+                <section>
+                    <id>code</id>
+                </section>
+            </sections>
+        </chapter>
+    </chapters>
+</book>
